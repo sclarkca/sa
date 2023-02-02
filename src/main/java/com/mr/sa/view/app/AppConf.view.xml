@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="AppConf">
+      <Property name="creationType">com.mr.sa.entity.app.AppConf</Property>
+      <PropertyDef name="id">
+        <Property name="dataType">String</Property>
+      </PropertyDef>
+      <PropertyDef name="createdDate">
+        <Property></Property>
+        <Property name="label">创建日期</Property>
+        <Property name="dataType">DateTime</Property>
+      </PropertyDef>
+      <PropertyDef name="creator">
+        <Property></Property>
+        <Property name="label">创建人</Property>
+      </PropertyDef>
+      <PropertyDef name="updateDate">
+        <Property></Property>
+        <Property name="label">修改日期</Property>
+        <Property name="dataType">DateTime</Property>
+      </PropertyDef>
+      <PropertyDef name="modifier">
+        <Property></Property>
+        <Property name="label">修改人</Property>
+      </PropertyDef>
+      <PropertyDef name="importDetail">
+        <Property></Property>
+        <Property name="label">导入详情</Property>
+      </PropertyDef>
+      <PropertyDef name="pointRadius">
+        <Property name="dataType">Integer</Property>
+        <Property name="label">扫码点半径(米)</Property>
+        <Property name="required">true</Property>
+      </PropertyDef>
+      <PropertyDef name="hotMapCountStartTime">
+        <Property name="dataType">DateTime</Property>
+        <Property name="label">热力图计算开始时间</Property>
+      </PropertyDef>
+      <PropertyDef name="hotMapCountEndTime">
+        <Property name="dataType">DateTime</Property>
+        <Property name="label">热力图计算结束时间</Property>
+      </PropertyDef>
+    </DataType>
+  </Model>
+  <View>
+    <Property name="packages">font-awesome</Property>
+    <Property name="title">App配置信息维护</Property>
+    <DataSet id="dsAppConf">
+      <Property name="dataProvider">appConfController#query</Property>
+      <Property name="pageSize">20</Property>
+      <Property name="dataType">[AppConf]</Property>
+      <Property name="loadMode">lazy</Property>
+    </DataSet>
+    <UpdateAction id="updateAction">
+      <Property name="successMessage">操作成功!</Property>
+      <Property name="executingMessage">正在保存...</Property>
+      <Property name="dataResolver">appConfController#save</Property>
+      <UpdateItem>
+        <Property name="dataSet">dsAppConf</Property>
+      </UpdateItem>
+    </UpdateAction>
+    <ToolBar>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var data=view.get(&quot;#dsAppConf.data&quot;);&#xD;
+if(data.current){&#xD;
+view.get(&quot;#dialogAppConf&quot;).show();&#xD;
+}else{&#xD;
+dorado.MessageBox.alert(&quot;当前表没有信息可供编辑!&quot;);&#xD;
+}</ClientEvent>
+        <Property name="caption">修改</Property>
+        <Property name="iconClass">fa fa-pencil-square-o</Property>
+      </ToolBarButton>
+    </ToolBar>
+    <DataGrid id="dgAppConf">
+      <Property name="dataSet">dsAppConf</Property>
+      <Property name="dataType">AppConf</Property>
+      <Property name="selectionMode">multiRows</Property>
+      <Property name="readOnly">true</Property>
+      <DataColumn name="hotMapCountEndTime">
+        <Property name="property">hotMapCountEndTime</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="hotMapCountStartTime">
+        <Property name="property">hotMapCountStartTime</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="pointRadius">
+        <Property name="property">pointRadius</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+    </DataGrid>
+    <Dialog id="dialogAppConf">
+      <ClientEvent name="onClose">var data=view.get(&quot;#dsAppConf&quot;).getData();&#xD;
+data.cancel();&#xD;
+</ClientEvent>
+      <Property name="center">true</Property>
+      <Property name="maximizeable">true</Property>
+      <Property name="width">1024</Property>
+      <Property name="height">500</Property>
+      <Property name="modal">true</Property>
+      <Property name="closeable">true</Property>
+      <Property name="caption">详情</Property>
+      <Buttons>
+        <Button>
+          <ClientEvent name="onClick">var data=view.get(&quot;#dsAppConf&quot;).getData();
+var dialog=view.get(&quot;#dialogAppConf&quot;);
+data.cancel();
+dialog.hide();</ClientEvent>
+          <Property name="caption">关闭</Property>
+          <Property name="iconClass">fa fa-arrow-circle-o-left</Property>
+          <Property name="ui">decline</Property>
+        </Button>
+        <Button>
+          <ClientEvent name="onClick">var dialog=view.get(&quot;#dialogAppConf&quot;);&#xD;
+var action=view.get(&quot;#updateAction&quot;);&#xD;
+action.execute(function(){&#xD;
+dialog.hide();&#xD;
+view.get(&quot;#dsAppConf&quot;).flushAsync(); &#xD;
+})</ClientEvent>
+          <Property name="caption">确定</Property>
+          <Property name="iconClass">fa fa-check-circle</Property>
+          <Property name="ui">highlight</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <AutoForm>
+          <Property name="labelWidth">140</Property>
+          <Property name="dataSet">dsAppConf</Property>
+          <Property name="cols">*</Property>
+          <Property name="labelAlign">center</Property>
+          <Property name="showHint">false</Property>
+          <Property name="showHintMessage">true</Property>
+          <Property name="width">600</Property>
+          <AutoFormElement>
+            <Property name="name">hotMapCountStartTime</Property>
+            <Property name="property">hotMapCountStartTime</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">hotMapCountEndTime</Property>
+            <Property name="property">hotMapCountEndTime</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">pointRadius</Property>
+            <Property name="property">pointRadius</Property>
+            <Editor/>
+          </AutoFormElement>
+        </AutoForm>
+      </Children>
+      <Tools/>
+    </Dialog>
+  </View>
+</ViewConfig>

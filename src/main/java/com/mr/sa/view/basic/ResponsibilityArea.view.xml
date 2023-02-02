@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="ResponsibilityArea">
+      <Property name="creationType">com.mr.sa.entity.basic.ResponsibilityArea</Property>
+      <PropertyDef name="id">
+        <Property name="dataType">String</Property>
+      </PropertyDef>
+      <PropertyDef name="areaName">
+        <Property name="dataType">String</Property>
+        <Property name="label">责任区名称</Property>
+      </PropertyDef>
+      <PropertyDef name="coordinate">
+        <Property name="dataType">String</Property>
+        <Property name="label">责任区坐标范围</Property>
+      </PropertyDef>
+      <PropertyDef name="centerLng">
+        <Property name="dataType">double</Property>
+        <Property name="label">中心点经度</Property>
+      </PropertyDef>
+      <PropertyDef name="centerLat">
+        <Property name="dataType">double</Property>
+        <Property name="label">中心点纬度</Property>
+      </PropertyDef>
+      <PropertyDef name="type">
+        <Property name="dataType">String</Property>
+        <Property name="label">责任区类型</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;enumProvider#getValues&quot;).getResult(&quot;RESPONSIBILITY_AREA_TYPE&quot;)}</Property>
+        </Property>
+      </PropertyDef>
+      <PropertyDef name="color">
+        <Property name="dataType">String</Property>
+        <Property name="label">区域颜色</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="ConditionResponsibilityArea">
+      <PropertyDef name="areaName">
+        <Property name="dataType">String</Property>
+        <Property name="label">责任区名称</Property>
+      </PropertyDef>
+      <PropertyDef name="coordinate">
+        <Property name="dataType">String</Property>
+        <Property name="label">责任区坐标范围</Property>
+      </PropertyDef>
+      <PropertyDef name="centerLng">
+        <Property name="dataType">String</Property>
+        <Property name="label">中心点经度</Property>
+      </PropertyDef>
+      <PropertyDef name="centerLat">
+        <Property name="dataType">String</Property>
+        <Property name="label">中心点纬度</Property>
+      </PropertyDef>
+      <PropertyDef name="type">
+        <Property name="dataType">String</Property>
+        <Property name="label">责任区类型</Property>
+      </PropertyDef>
+      <PropertyDef name="color">
+        <Property name="dataType">String</Property>
+        <Property name="label">区域颜色</Property>
+      </PropertyDef>
+    </DataType>
+  </Model>
+  <View>
+    <Property name="packages">font-awesome</Property>
+    <Property name="title">责任区信息维护</Property>
+    <DataSet id="dsResponsibilityArea">
+      <ClientEvent name="beforeLoadData">var data = view.get(&quot;#formConditionResponsibilityArea.entity&quot;);&#xD;
+self.set(&quot;parameter&quot;, data);</ClientEvent>
+      <Property name="dataProvider">responsibilityAreaController#query</Property>
+      <Property name="pageSize">20</Property>
+      <Property name="dataType">[ResponsibilityArea]</Property>
+      <Property name="loadMode">lazy</Property>
+    </DataSet>
+    <UpdateAction id="uaResponsibilityArea">
+      <Property name="successMessage">操作成功!</Property>
+      <Property name="executingMessage">正在保存...</Property>
+      <Property name="dataResolver">responsibilityAreaController#save</Property>
+      <UpdateItem>
+        <Property name="dataSet">dsResponsibilityArea</Property>
+      </UpdateItem>
+    </UpdateAction>
+    <AutoForm id="formConditionResponsibilityArea">
+      <ClientEvent name="onKeyDown">if (arg.keyCode === 13) {&#xD;
+window.clearTimeout(self.urlQueryTimeout);&#xD;
+self.urlQueryTimeout = window.setTimeout(function() {&#xD;
+var data = view.get(&quot;#formConditionResponsibilityArea.entity&quot;);&#xD;
+with (view.get(&quot;#dsResponsibilityArea&quot;)) {&#xD;
+set(&quot;parameter&quot;, data);&#xD;
+flushAsync();&#xD;
+}&#xD;
+}, 250);&#xD;
+}</ClientEvent>
+      <Property name="labelWidth">120</Property>
+      <Property name="cols">*,*,*,*</Property>
+      <Property name="createPrivateDataSet">true</Property>
+      <Property name="dataType">ConditionResponsibilityArea</Property>
+      <Property name="labelAlign">center</Property>
+      <Property name="showHint">false</Property>
+      <AutoFormElement>
+        <Property name="property">areaName</Property>
+        <Property name="name">责任区名称</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="property">type</Property>
+        <Property name="name">责任区类型</Property>
+        <Editor/>
+      </AutoFormElement>
+    </AutoForm>
+    <ToolBar>
+      <ToolBarButton>
+        <ClientEvent name="onClick">view.get(&quot;#dsResponsibilityArea&quot;).flushAsync();</ClientEvent>
+        <Property name="caption">查询</Property>
+        <Property name="iconClass">fa fa-search</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var datas = view.get(&quot;#dsResponsibilityArea.data&quot;);&#xD;
+datas.insert();&#xD;
+view.get(&quot;#dialogResponsibilityArea&quot;).show();&#xD;
+arg.processDefault=false;</ClientEvent>
+        <Property name="caption">新增</Property>
+        <Property name="iconClass">fa fa-plus</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var entity = view.get(&quot;#dsResponsibilityArea&quot;).getData(&quot;#&quot;);&#xD;
+if(entity){&#xD;
+view.get(&quot;#dialogResponsibilityArea&quot;).show();&#xD;
+}else{&#xD;
+dorado.MessageBox.alert(&quot;当前表没有信息可供编辑&quot;);&#xD;
+}</ClientEvent>
+        <Property name="caption">修改</Property>
+        <Property name="iconClass">fa fa-pencil-square-o</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var uaResponsibilityArea=view.get(&quot;#uaResponsibilityArea&quot;);&#xD;
+var selection = view.get(&quot;#dgResponsibilityArea&quot;).get(&quot;selection&quot;);&#xD;
+&#xD;
+if(0 != selection.length) {&#xD;
+dorado.MessageBox.confirm(&quot;确认操作吗?&quot;,function(){&#xD;
+&#xD;
+for (var i = 0; i &lt; selection.length; i++) {&#xD;
+var select = selection[i];&#xD;
+select.remove();&#xD;
+}&#xD;
+&#xD;
+uaResponsibilityArea.execute();&#xD;
+view.get(&quot;#dsResponsibilityArea&quot;).flushAsync(); &#xD;
+})&#xD;
+&#xD;
+} else {&#xD;
+dorado.MessageBox.alert(&quot;请选择需要操作的记录！&quot;);&#xD;
+}&#xD;
+&#xD;
+&#xD;
+</ClientEvent>
+        <Property name="iconClass">fa fa-trash-o</Property>
+        <Property name="caption">删除</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <Property name="caption">导出</Property>
+        <Property name="iconClass">fa fa-cloud-download</Property>
+        <Property name="action">eaResponsibilityArea</Property>
+      </ToolBarButton>
+      <Fill/>
+      <DataPilot>
+        <Property name="dataSet">dsResponsibilityArea</Property>
+        <Property name="itemCodes">pages,pageSize</Property>
+      </DataPilot>
+    </ToolBar>
+    <DataGrid id="dgResponsibilityArea">
+      <Property name="dataSet">dsResponsibilityArea</Property>
+      <Property name="dataType">ResponsibilityArea</Property>
+      <Property name="selectionMode">multiRows</Property>
+      <Property name="readOnly">true</Property>
+      <RowSelectorColumn/>
+      <RowNumColumn/>
+      <DataColumn name="责任区名称">
+        <Property name="caption">责任区名称</Property>
+        <Property name="property">areaName</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="中心点经度">
+        <Property name="caption">中心点经度</Property>
+        <Property name="property">centerLng</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="中心点纬度">
+        <Property name="caption">中心点纬度</Property>
+        <Property name="property">centerLat</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="责任区类型">
+        <Property name="caption">责任区类型</Property>
+        <Property name="property">type</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="区域颜色">
+        <ClientEvent name="onRenderCell">arg.dom.style.background = arg.data.get(&quot;color&quot;);
+arg.dom.style.color = arg.data.get(&quot;color&quot;);
+arg.processDefault = true;</ClientEvent>
+        <Property name="caption">区域颜色</Property>
+        <Property name="property">color</Property>
+        <Property name="align">center</Property>
+        <Property name="editable">true</Property>
+        <Property name="editorType">TextEditor</Property>
+        <Editor/>
+      </DataColumn>
+    </DataGrid>
+    <Dialog id="dialogResponsibilityArea">
+      <ClientEvent name="onClose">var data=view.get(&quot;#dsResponsibilityArea&quot;).getData();&#xD;
+data.cancel();&#xD;
+</ClientEvent>
+      <Property name="center">true</Property>
+      <Property name="maximizeable">true</Property>
+      <Property name="width">1024</Property>
+      <Property name="height">500</Property>
+      <Property name="modal">true</Property>
+      <Property name="closeable">true</Property>
+      <Property name="caption">详情</Property>
+      <Buttons>
+        <Button>
+          <ClientEvent name="onClick">var data=view.get(&quot;#dsResponsibilityArea&quot;).getData();
+var dialog=view.get(&quot;#dialogResponsibilityArea&quot;);
+data.cancel();
+dialog.hide();</ClientEvent>
+          <Property name="caption">关闭</Property>
+          <Property name="iconClass">fa fa-arrow-circle-o-left</Property>
+          <Property name="ui">decline</Property>
+        </Button>
+        <Button>
+          <ClientEvent name="onClick">var dialog=view.get(&quot;#dialogResponsibilityArea&quot;);&#xD;
+var action=view.get(&quot;#uaResponsibilityArea&quot;);&#xD;
+action.execute(function(){&#xD;
+dialog.hide();&#xD;
+view.get(&quot;#dsResponsibilityArea&quot;).flushAsync(); &#xD;
+})</ClientEvent>
+          <Property name="caption">确定</Property>
+          <Property name="iconClass">fa fa-check-circle</Property>
+          <Property name="ui">highlight</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <AutoForm>
+          <Property name="labelWidth">120</Property>
+          <Property name="dataSet">dsResponsibilityArea</Property>
+          <Property name="cols">*,*</Property>
+          <Property name="labelAlign">center</Property>
+          <Property name="showHint">false</Property>
+          <Property name="showHintMessage">true</Property>
+          <AutoFormElement>
+            <Property name="name">责任区名称</Property>
+            <Property name="property">areaName</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">责任区坐标范围</Property>
+            <Property name="property">coordinate</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">中心点经度</Property>
+            <Property name="property">centerLng</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">中心点纬度</Property>
+            <Property name="property">centerLat</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">责任区类型</Property>
+            <Property name="property">type</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">区域颜色</Property>
+            <Property name="property">color</Property>
+            <Editor>
+              <ColorEditor>
+                <Property name="showAlpha">true</Property>
+                <Property name="showPalette">true</Property>
+                <Property name="showInitial">true</Property>
+                <Property name="showInput">true</Property>
+                <Property name="palette">#named</Property>
+                <Property name="preferredFormat">hex</Property>
+              </ColorEditor>
+            </Editor>
+          </AutoFormElement>
+        </AutoForm>
+      </Children>
+      <Tools/>
+    </Dialog>
+    <Export2ReportAction id="eaResponsibilityArea">
+      <Property name="template">dgResponsibilityArea</Property>
+      <Property name="dataScope">serverAll</Property>
+      <Property name="executingMessage">正在导出……</Property>
+      <Property name="successMessage">数据导出成功。</Property>
+      <Property name="extension">xlsx</Property>
+      <Property name="maxSize">10000</Property>
+      <Property name="fileName">责任区</Property>
+    </Export2ReportAction>
+  </View>
+</ViewConfig>

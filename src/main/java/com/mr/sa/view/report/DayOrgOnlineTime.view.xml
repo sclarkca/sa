@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="Condition">
+      <PropertyDef name="orgName">
+        <Property></Property>
+        <Property name="label">单位名称</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="UserOnlineTime">
+      <Property name="creationType">com.mr.sa.dto.OrgOnlineTimeDTO</Property>
+      <PropertyDef name="orgName">
+        <Property/>
+      </PropertyDef>
+      <PropertyDef name="seconds">
+        <Property name="dataType">Long</Property>
+      </PropertyDef>
+      <PropertyDef name="time">
+        <Property/>
+      </PropertyDef>
+    </DataType>
+  </Model>
+  <View>
+    <Property name="packages">font-awesome</Property>
+    <Property name="title">事件处理记录信息维护</Property>
+    <DataSet id="dsUserOnlineTime">
+      <ClientEvent name="onReady">var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+with (view.get(&quot;#dsUserOnlineTime&quot;)){&#xD;
+set(&quot;parameter&quot;, data);&#xD;
+flushAsync();&#xD;
+}</ClientEvent>
+      <Property name="dataProvider">userOnlineTimeController#queryDayOrgOnlineTimeList</Property>
+      <Property name="dataType">[UserOnlineTime]</Property>
+      <Property>lazy</Property>
+    </DataSet>
+    <AutoForm id="formCondition">
+      <ClientEvent name="onKeyDown">if (arg.keyCode === 13) {&#xD;
+window.clearTimeout(self.urlQueryTimeout);&#xD;
+self.urlQueryTimeout = window.setTimeout(function() {&#xD;
+var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+with (view.get(&quot;#dsUserOnlineTime&quot;)) {&#xD;
+set(&quot;parameter&quot;, data);&#xD;
+flushAsync();&#xD;
+}&#xD;
+}, 250);&#xD;
+}</ClientEvent>
+      <Property name="labelWidth">100</Property>
+      <Property name="cols">*,*,*,*</Property>
+      <Property name="createPrivateDataSet">true</Property>
+      <Property name="dataType">Condition</Property>
+      <Property name="labelAlign">center</Property>
+      <Property name="showHint">false</Property>
+      <AutoFormElement>
+        <Property name="name">orgName</Property>
+        <Property name="property">orgName</Property>
+        <Editor/>
+      </AutoFormElement>
+    </AutoForm>
+    <ToolBar>
+      <Property name="fixRight">true</Property>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+with (view.get(&quot;#dsUserOnlineTime&quot;)){&#xD;
+set(&quot;parameter&quot;, data);&#xD;
+flushAsync();&#xD;
+}</ClientEvent>
+        <Property name="caption">查询</Property>
+        <Property name="iconClass">fa fa-search</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <Property name="caption">导出</Property>
+        <Property name="iconClass">fa fa-cloud-download</Property>
+        <Property name="action">exportAction</Property>
+      </ToolBarButton>
+      <Fill/>
+    </ToolBar>
+    <DataGrid id="dgUserOnlineTime">
+      <Property name="dataSet">dsUserOnlineTime</Property>
+      <Property name="dataType">UserOnlineTime</Property>
+      <Property name="selectionMode">multiRows</Property>
+      <Property name="readOnly">true</Property>
+      <RowNumColumn/>
+      <DataColumn name="orgName">
+        <Property name="property">orgName</Property>
+        <Property name="caption">单位名称</Property>
+      </DataColumn>
+      <DataColumn name="time">
+        <Property name="property">time</Property>
+        <Property name="caption">在线时长</Property>
+      </DataColumn>
+    </DataGrid>
+    <Export2ReportAction id="exportAction">
+      <Property name="template">dgUserOnlineTime</Property>
+      <Property name="dataScope">serverAll</Property>
+      <Property name="executingMessage">正在导出……</Property>
+      <Property name="successMessage">数据导出成功。</Property>
+      <Property name="extension">xlsx</Property>
+      <Property name="maxSize">10000</Property>
+      <Property name="fileName">用户巡逻时长</Property>
+    </Export2ReportAction>
+  </View>
+</ViewConfig>

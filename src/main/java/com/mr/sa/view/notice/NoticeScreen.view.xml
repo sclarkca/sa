@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="NoticeScreen">
+      <Property name="creationType">com.mr.sa.entity.NoticeScreen</Property>
+      <PropertyDef name="id">
+        <Property name="dataType">String</Property>
+      </PropertyDef>
+      <PropertyDef name="name">
+        <Property name="dataType">String</Property>
+        <Property name="label">主题</Property>
+      </PropertyDef>
+      <PropertyDef name="type">
+        <Property name="dataType">String</Property>
+        <Property name="label">类型</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;enumProvider#getValues&quot;).getResult(&quot;NOTICE_TYPE&quot;)}</Property>
+        </Property>
+      </PropertyDef>
+      <PropertyDef name="content">
+        <Property name="dataType">String</Property>
+        <Property name="label">内容</Property>
+      </PropertyDef>
+      <PropertyDef name="createdDate">
+        <Property></Property>
+        <Property name="label">创建日期</Property>
+        <Property name="dataType">DateTime</Property>
+      </PropertyDef>
+      <PropertyDef name="creator">
+        <Property></Property>
+        <Property name="label">创建人</Property>
+      </PropertyDef>
+      <PropertyDef name="updateDate">
+        <Property></Property>
+        <Property name="label">修改日期</Property>
+        <Property name="dataType">DateTime</Property>
+      </PropertyDef>
+      <PropertyDef name="modifier">
+        <Property></Property>
+        <Property name="label">修改人</Property>
+      </PropertyDef>
+      <PropertyDef name="top">
+        <Property name="dataType">boolean</Property>
+        <Property name="label">是否置顶</Property>
+      </PropertyDef>
+      <PropertyDef name="topTime">
+        <Property name="dataType">DateTime</Property>
+        <Property name="label">置顶时间</Property>
+      </PropertyDef>
+    </DataType>
+  </Model>
+  <View>
+    <Property name="packages">font-awesome,colors,entypo</Property>
+    <Property name="title">公告信息维护</Property>
+    <Container id="ds">
+      <DataSet id="dsNoticeScreen">
+        <Property name="dataProvider">noticeScreenController#query</Property>
+        <Property name="pageSize">20</Property>
+        <Property name="dataType">[NoticeScreen]</Property>
+        <Property name="loadMode">lazy</Property>
+      </DataSet>
+    </Container>
+    <Container id="action">
+      <UpdateAction id="updateAction">
+        <Property name="successMessage">操作成功!</Property>
+        <Property name="executingMessage">正在保存...</Property>
+        <Property name="dataResolver">noticeScreenController#save</Property>
+        <UpdateItem>
+          <Property name="dataSet">dsNoticeScreen</Property>
+        </UpdateItem>
+      </UpdateAction>
+    </Container>
+    <ToolBar>
+      <Property name="fixRight">true</Property>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var data=view.get(&quot;#dsNoticeScreen.data&quot;);&#xD;
+if(data.current){&#xD;
+view.get(&quot;#dialogNoticeScreen&quot;).show();&#xD;
+}else{&#xD;
+dorado.MessageBox.alert(&quot;当前表没有信息可供编辑!&quot;);&#xD;
+}</ClientEvent>
+        <Property name="caption">修改</Property>
+        <Property name="iconClass">fa fa-pencil-square-o</Property>
+      </ToolBarButton>
+      <Fill/>
+      <DataPilot>
+        <Property name="dataSet">dsNoticeScreen</Property>
+        <Property name="itemCodes">pages,pageSize</Property>
+      </DataPilot>
+    </ToolBar>
+    <DataGrid id="dgNoticeScreen">
+      <Property name="dataSet">dsNoticeScreen</Property>
+      <Property name="dataType">NoticeScreen</Property>
+      <Property name="selectionMode">multiRows</Property>
+      <Property name="readOnly">true</Property>
+      <Property name="highlightCurrentRow">false</Property>
+      <DataColumn>
+        <Property name="caption">主题</Property>
+        <Property name="property">name</Property>
+        <Property name="align">center</Property>
+        <Property name="name">主题</Property>
+      </DataColumn>
+      <DataColumn name="类型">
+        <Property name="caption">类型</Property>
+        <Property name="property">type</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="createdDate">
+        <Property name="property">createdDate</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="creator">
+        <Property name="property">creator</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+    </DataGrid>
+    <Dialog id="dialogNoticeScreen">
+      <ClientEvent name="onClose">var data=view.get(&quot;#dsNoticeScreen&quot;).getData();&#xD;
+data.cancel();&#xD;
+</ClientEvent>
+      <Property name="center">true</Property>
+      <Property name="maximizeable">true</Property>
+      <Property name="width">1024</Property>
+      <Property name="height">500</Property>
+      <Property name="modal">true</Property>
+      <Property name="closeable">true</Property>
+      <Property name="caption">详情</Property>
+      <Buttons>
+        <Button>
+          <ClientEvent name="onClick">var data=view.get(&quot;#dsNoticeScreen&quot;).getData();
+var dialog=view.get(&quot;#dialogNoticeScreen&quot;);
+data.cancel();
+dialog.hide();</ClientEvent>
+          <Property name="caption">关闭</Property>
+          <Property name="iconClass">fa fa-arrow-circle-o-left</Property>
+          <Property name="ui">decline</Property>
+        </Button>
+        <Button>
+          <ClientEvent name="onClick">var dialog=view.get(&quot;#dialogNoticeScreen&quot;);&#xD;
+var action=view.get(&quot;#updateAction&quot;);&#xD;
+action.execute(function(){&#xD;
+dialog.hide();&#xD;
+view.get(&quot;#dsNoticeScreen&quot;).flushAsync(); &#xD;
+})</ClientEvent>
+          <Property name="caption">确定</Property>
+          <Property name="iconClass">fa fa-check-circle</Property>
+          <Property name="ui">highlight</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <AutoForm>
+          <Property name="labelWidth">100</Property>
+          <Property name="dataSet">dsNoticeScreen</Property>
+          <Property name="cols">*,*</Property>
+          <Property name="labelAlign">center</Property>
+          <Property name="showHint">false</Property>
+          <Property name="showHintMessage">true</Property>
+          <AutoFormElement name="name">
+            <Property name="name">name</Property>
+            <Property name="property">name</Property>
+            <Property name="label">名称</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement name="type">
+            <Property name="name">type</Property>
+            <Property name="property">type</Property>
+            <Property name="label">类型</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement layoutConstraint="colSpan:2" name="content">
+            <Property name="name">content</Property>
+            <Property name="property">content</Property>
+            <Property name="label">内容</Property>
+            <Property name="editorType">TextArea</Property>
+            <Editor>
+              <UEditor>
+                <ClientEvent name="onCreate">dorado.ueditor.registerMode(&quot;custom&quot;, [&#xD;
+'source','undo','redo','fontsize','removeformat','formatmatch', 'bold','italic','underline','fontfamily','forecolor','backcolor','|','indent','justifyleft','justifycenter','justifyright','justifyjustify','rowspacingtop','rowspacingbottom','lineheight','customstyle','paragraph','|','insertorderedlist','insertunorderedlist','horizontal','|','link','unlink','inserttable','deletetable','insertparagraphbeforetable','insertrow','deleterow','insertcol','mergecells','mergeright','mergedown','splittocells','splittorows','splittocols','emotion','insertimage','insertvideo','|','selectall','cleardoc','preview','fullscreen'&#xD;
+]);</ClientEvent>
+                <Property name="mode">custom</Property>
+                <Property name="property">content</Property>
+                <Property name="height">800</Property>
+              </UEditor>
+            </Editor>
+          </AutoFormElement>
+        </AutoForm>
+      </Children>
+      <Tools/>
+    </Dialog>
+  </View>
+</ViewConfig>

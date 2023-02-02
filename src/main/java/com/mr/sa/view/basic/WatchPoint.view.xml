@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="WatchPoint">
+      <Property name="creationType">com.mr.sa.entity.basic.WatchPoint</Property>
+      <PropertyDef name="id">
+        <Property name="dataType">String</Property>
+      </PropertyDef>
+      <PropertyDef name="pointName">
+        <Property name="dataType">String</Property>
+        <Property name="label">守望点名称</Property>
+      </PropertyDef>
+      <PropertyDef name="pointAddr">
+        <Property name="dataType">String</Property>
+        <Property name="label">守望点地址</Property>
+      </PropertyDef>
+      <PropertyDef name="owner">
+        <Property name="dataType">String</Property>
+        <Property name="label">责任人</Property>
+      </PropertyDef>
+      <PropertyDef name="ownerPhone">
+        <Property name="dataType">String</Property>
+        <Property name="label">责任人电话</Property>
+      </PropertyDef>
+      <PropertyDef name="workerNum">
+        <Property name="dataType">Integer</Property>
+        <Property name="label">当班人数</Property>
+      </PropertyDef>
+      <PropertyDef name="gloversNum">
+        <Property name="dataType">Integer</Property>
+        <Property name="label">手套数量</Property>
+      </PropertyDef>
+      <PropertyDef name="forkNum">
+        <Property name="dataType">Integer</Property>
+        <Property name="label">钢叉数量</Property>
+      </PropertyDef>
+      <PropertyDef name="bationNum">
+        <Property name="dataType">Integer</Property>
+        <Property name="label">警棍数量</Property>
+      </PropertyDef>
+      <PropertyDef name="shieldNum">
+        <Property name="dataType">Integer</Property>
+        <Property name="label">盾牌数量</Property>
+      </PropertyDef>
+      <PropertyDef name="lng">
+        <Property name="dataType">double</Property>
+        <Property name="label">经度</Property>
+      </PropertyDef>
+      <PropertyDef name="lat">
+        <Property name="dataType">double</Property>
+        <Property name="label">纬度</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="ConditionWatchPoint">
+      <PropertyDef name="pointName">
+        <Property name="dataType">String</Property>
+        <Property name="label">守望点名称</Property>
+      </PropertyDef>
+      <PropertyDef name="pointAddr">
+        <Property name="dataType">String</Property>
+        <Property name="label">守望点地址</Property>
+      </PropertyDef>
+      <PropertyDef name="owner">
+        <Property name="dataType">String</Property>
+        <Property name="label">责任人</Property>
+      </PropertyDef>
+      <PropertyDef name="ownerPhone">
+        <Property name="dataType">String</Property>
+        <Property name="label">责任人电话</Property>
+      </PropertyDef>
+      <PropertyDef name="workerNum">
+        <Property name="dataType">String</Property>
+        <Property name="label">当班人数</Property>
+      </PropertyDef>
+      <PropertyDef name="gloversNum">
+        <Property name="dataType">String</Property>
+        <Property name="label">手套数量</Property>
+      </PropertyDef>
+      <PropertyDef name="forkNum">
+        <Property name="dataType">String</Property>
+        <Property name="label">钢叉数量</Property>
+      </PropertyDef>
+      <PropertyDef name="bationNum">
+        <Property name="dataType">String</Property>
+        <Property name="label">警棍数量</Property>
+      </PropertyDef>
+      <PropertyDef name="shieldNum">
+        <Property name="dataType">String</Property>
+        <Property name="label">盾牌数量</Property>
+      </PropertyDef>
+      <PropertyDef name="lng">
+        <Property name="dataType">String</Property>
+        <Property name="label">经度</Property>
+      </PropertyDef>
+      <PropertyDef name="lat">
+        <Property name="dataType">String</Property>
+        <Property name="label">纬度</Property>
+      </PropertyDef>
+    </DataType>
+  </Model>
+  <View>
+    <Property name="packages">font-awesome</Property>
+    <Property name="title">守望点信息维护</Property>
+    <DataSet id="dsWatchPoint">
+      <ClientEvent name="beforeLoadData">var data = view.get(&quot;#formConditionWatchPoint.entity&quot;);&#xD;
+self.set(&quot;parameter&quot;, data);</ClientEvent>
+      <Property name="dataProvider">watchPointController#query</Property>
+      <Property name="pageSize">20</Property>
+      <Property name="dataType">[WatchPoint]</Property>
+      <Property name="loadMode">lazy</Property>
+    </DataSet>
+    <UpdateAction id="uaWatchPoint">
+      <Property name="successMessage">操作成功!</Property>
+      <Property name="executingMessage">正在保存...</Property>
+      <Property name="dataResolver">watchPointController#save</Property>
+      <UpdateItem>
+        <Property name="dataSet">dsWatchPoint</Property>
+      </UpdateItem>
+    </UpdateAction>
+    <AutoForm id="formConditionWatchPoint">
+      <ClientEvent name="onKeyDown">if (arg.keyCode === 13) {&#xD;
+window.clearTimeout(self.urlQueryTimeout);&#xD;
+self.urlQueryTimeout = window.setTimeout(function() {&#xD;
+var data = view.get(&quot;#formConditionWatchPoint.entity&quot;);&#xD;
+with (view.get(&quot;#dsWatchPoint&quot;)) {&#xD;
+set(&quot;parameter&quot;, data);&#xD;
+flushAsync();&#xD;
+}&#xD;
+}, 250);&#xD;
+}</ClientEvent>
+      <Property name="labelWidth">120</Property>
+      <Property name="cols">*,*,*,*</Property>
+      <Property name="createPrivateDataSet">true</Property>
+      <Property name="dataType">ConditionWatchPoint</Property>
+      <Property name="labelAlign">center</Property>
+      <Property name="showHint">false</Property>
+      <AutoFormElement>
+        <Property name="property">pointName</Property>
+        <Property name="name">守望点名称</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="property">pointAddr</Property>
+        <Property name="name">守望点地址</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="property">owner</Property>
+        <Property name="name">责任人</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="property">ownerPhone</Property>
+        <Property name="name">责任人电话</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="property">workerNum</Property>
+        <Property name="name">当班人数</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="property">gloversNum</Property>
+        <Property name="name">手套数量</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="property">forkNum</Property>
+        <Property name="name">钢叉数量</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="property">bationNum</Property>
+        <Property name="name">警棍数量</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="property">shieldNum</Property>
+        <Property name="name">盾牌数量</Property>
+        <Editor/>
+      </AutoFormElement>
+    </AutoForm>
+    <ToolBar>
+      <ToolBarButton>
+        <ClientEvent name="onClick">view.get(&quot;#dsWatchPoint&quot;).flushAsync();</ClientEvent>
+        <Property name="caption">查询</Property>
+        <Property name="iconClass">fa fa-search</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var datas = view.get(&quot;#dsWatchPoint.data&quot;);&#xD;
+datas.insert();&#xD;
+view.get(&quot;#dialogWatchPoint&quot;).show();&#xD;
+arg.processDefault=false;</ClientEvent>
+        <Property name="caption">新增</Property>
+        <Property name="iconClass">fa fa-plus</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var entity = view.get(&quot;#dsWatchPoint&quot;).getData(&quot;#&quot;);&#xD;
+if(entity){&#xD;
+view.get(&quot;#dialogWatchPoint&quot;).show();&#xD;
+}else{&#xD;
+dorado.MessageBox.alert(&quot;当前表没有信息可供编辑&quot;);&#xD;
+}</ClientEvent>
+        <Property name="caption">修改</Property>
+        <Property name="iconClass">fa fa-pencil-square-o</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var uaWatchPoint=view.get(&quot;#uaWatchPoint&quot;);&#xD;
+var selection = view.get(&quot;#dgWatchPoint&quot;).get(&quot;selection&quot;);&#xD;
+&#xD;
+if(0 != selection.length) {&#xD;
+dorado.MessageBox.confirm(&quot;确认操作吗?&quot;,function(){&#xD;
+&#xD;
+for (var i = 0; i &lt; selection.length; i++) {&#xD;
+var select = selection[i];&#xD;
+select.remove();&#xD;
+}&#xD;
+&#xD;
+uaWatchPoint.execute();&#xD;
+view.get(&quot;#dsWatchPoint&quot;).flushAsync(); &#xD;
+})&#xD;
+&#xD;
+} else {&#xD;
+dorado.MessageBox.alert(&quot;请选择需要操作的记录！&quot;);&#xD;
+}&#xD;
+&#xD;
+&#xD;
+</ClientEvent>
+        <Property name="iconClass">fa fa-trash-o</Property>
+        <Property name="caption">删除</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <Property name="caption">导出</Property>
+        <Property name="iconClass">fa fa-cloud-download</Property>
+        <Property name="action">eaWatchPoint</Property>
+      </ToolBarButton>
+      <Fill/>
+      <DataPilot>
+        <Property name="dataSet">dsWatchPoint</Property>
+        <Property name="itemCodes">pages,pageSize</Property>
+      </DataPilot>
+    </ToolBar>
+    <DataGrid id="dgWatchPoint">
+      <Property name="dataSet">dsWatchPoint</Property>
+      <Property name="dataType">WatchPoint</Property>
+      <Property name="selectionMode">multiRows</Property>
+      <Property name="readOnly">true</Property>
+      <RowSelectorColumn/>
+      <RowNumColumn/>
+      <DataColumn name="守望点名称">
+        <Property name="caption">守望点名称</Property>
+        <Property name="property">pointName</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="守望点地址">
+        <Property name="caption">守望点地址</Property>
+        <Property name="property">pointAddr</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="责任人">
+        <Property name="caption">责任人</Property>
+        <Property name="property">owner</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="责任人电话">
+        <Property name="caption">责任人电话</Property>
+        <Property name="property">ownerPhone</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="当班人数">
+        <Property name="caption">当班人数</Property>
+        <Property name="property">workerNum</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="手套数量">
+        <Property name="caption">手套数量</Property>
+        <Property name="property">gloversNum</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="钢叉数量">
+        <Property name="caption">钢叉数量</Property>
+        <Property name="property">forkNum</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="警棍数量">
+        <Property name="caption">警棍数量</Property>
+        <Property name="property">bationNum</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="盾牌数量">
+        <Property name="caption">盾牌数量</Property>
+        <Property name="property">shieldNum</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="经度">
+        <Property name="caption">经度</Property>
+        <Property name="property">lng</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="纬度">
+        <Property name="caption">纬度</Property>
+        <Property name="property">lat</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+    </DataGrid>
+    <Dialog id="dialogWatchPoint">
+      <ClientEvent name="onClose">var data=view.get(&quot;#dsWatchPoint&quot;).getData();&#xD;
+data.cancel();&#xD;
+</ClientEvent>
+      <Property name="center">true</Property>
+      <Property name="maximizeable">true</Property>
+      <Property name="width">1024</Property>
+      <Property name="height">500</Property>
+      <Property name="modal">true</Property>
+      <Property name="closeable">true</Property>
+      <Property name="caption">详情</Property>
+      <Buttons>
+        <Button>
+          <ClientEvent name="onClick">var data=view.get(&quot;#dsWatchPoint&quot;).getData();
+var dialog=view.get(&quot;#dialogWatchPoint&quot;);
+data.cancel();
+dialog.hide();</ClientEvent>
+          <Property name="caption">关闭</Property>
+          <Property name="iconClass">fa fa-arrow-circle-o-left</Property>
+          <Property name="ui">decline</Property>
+        </Button>
+        <Button>
+          <ClientEvent name="onClick">var dialog=view.get(&quot;#dialogWatchPoint&quot;);&#xD;
+var action=view.get(&quot;#uaWatchPoint&quot;);&#xD;
+action.execute(function(){&#xD;
+dialog.hide();&#xD;
+view.get(&quot;#dsWatchPoint&quot;).flushAsync(); &#xD;
+})</ClientEvent>
+          <Property name="caption">确定</Property>
+          <Property name="iconClass">fa fa-check-circle</Property>
+          <Property name="ui">highlight</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <AutoForm>
+          <Property name="labelWidth">120</Property>
+          <Property name="dataSet">dsWatchPoint</Property>
+          <Property name="cols">*,*</Property>
+          <Property name="labelAlign">center</Property>
+          <Property name="showHint">false</Property>
+          <Property name="showHintMessage">true</Property>
+          <AutoFormElement>
+            <Property name="name">守望点名称</Property>
+            <Property name="property">pointName</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">守望点地址</Property>
+            <Property name="property">pointAddr</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">责任人</Property>
+            <Property name="property">owner</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">责任人电话</Property>
+            <Property name="property">ownerPhone</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">当班人数</Property>
+            <Property name="property">workerNum</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">手套数量</Property>
+            <Property name="property">gloversNum</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">钢叉数量</Property>
+            <Property name="property">forkNum</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">警棍数量</Property>
+            <Property name="property">bationNum</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">盾牌数量</Property>
+            <Property name="property">shieldNum</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">经度</Property>
+            <Property name="property">lng</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">纬度</Property>
+            <Property name="property">lat</Property>
+            <Editor/>
+          </AutoFormElement>
+        </AutoForm>
+      </Children>
+      <Tools/>
+    </Dialog>
+    <Export2ReportAction id="eaWatchPoint">
+      <Property name="template">dgWatchPoint</Property>
+      <Property name="dataScope">serverAll</Property>
+      <Property name="executingMessage">正在导出……</Property>
+      <Property name="successMessage">数据导出成功。</Property>
+      <Property name="extension">xlsx</Property>
+      <Property name="maxSize">10000</Property>
+      <Property name="fileName">守望点</Property>
+    </Export2ReportAction>
+  </View>
+</ViewConfig>

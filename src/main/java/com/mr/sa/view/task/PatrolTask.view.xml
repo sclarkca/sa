@@ -1,0 +1,1731 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="PatrolTask">
+      <Property name="creationType">com.mr.sa.entity.PatrolTask</Property>
+      <PropertyDef name="id">
+        <Property name="dataType">String</Property>
+      </PropertyDef>
+      <PropertyDef name="name">
+        <Property name="dataType">String</Property>
+        <Property name="label">任务名称</Property>
+        <Property name="required">true</Property>
+      </PropertyDef>
+      <PropertyDef name="doneRatio">
+        <Property name="dataType">Integer</Property>
+        <Property name="label">完成比例(%)</Property>
+        <Property name="required">true</Property>
+      </PropertyDef>
+      <PropertyDef name="activeFlag">
+        <Property name="dataType">String</Property>
+        <Property name="label">激活标记</Property>
+      </PropertyDef>
+      <PropertyDef name="activeTime">
+        <Property name="dataType">DateTime</Property>
+        <Property name="label">激活时间</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolStartDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">巡防开始日期</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolEndDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">巡防结束日期</Property>
+      </PropertyDef>
+      <PropertyDef name="createdDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">创建日期</Property>
+      </PropertyDef>
+      <PropertyDef name="creator">
+        <Property></Property>
+        <Property name="label">创建人</Property>
+      </PropertyDef>
+      <PropertyDef name="updateDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">修改日期</Property>
+      </PropertyDef>
+      <PropertyDef name="modifier">
+        <Property></Property>
+        <Property name="label">修改人</Property>
+      </PropertyDef>
+      <PropertyDef name="activeStatus">
+        <Property></Property>
+        <Property name="label">状态</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;enumProvider#getValues&quot;).getResult(&quot;PATROL_TASK_ACTIVE_STATUS&quot;)}</Property>
+        </Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="Condition">
+      <PropertyDef name="name">
+        <Property name="dataType">String</Property>
+        <Property name="label">任务名称</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolStartTime_startTime">
+        <Property name="dataType">DateTime</Property>
+        <Property name="label">巡访开始时间(起)</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolStartTime_endTime">
+        <Property name="dataType">DateTime</Property>
+        <Property name="label">巡访开始时间(至)</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolStartTime">
+        <Property name="dataType">String</Property>
+        <Property name="label">巡访开始时间</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolEndTime_startTime">
+        <Property name="dataType">DateTime</Property>
+        <Property name="label">巡访结束时间(起)</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolEndTime_endTime">
+        <Property name="dataType">DateTime</Property>
+        <Property name="label">巡访结束时间(至)</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolEndTime">
+        <Property name="dataType">String</Property>
+        <Property name="label">巡访结束时间</Property>
+      </PropertyDef>
+      <PropertyDef name="doneRatio">
+        <Property name="dataType">String</Property>
+        <Property name="label">完成比例(%)</Property>
+      </PropertyDef>
+      <PropertyDef name="activeFlag">
+        <Property name="dataType">String</Property>
+        <Property name="label">激活标记</Property>
+      </PropertyDef>
+      <PropertyDef name="activeTime_startTime">
+        <Property name="dataType">DateTime</Property>
+        <Property name="label">激活时间(起)</Property>
+      </PropertyDef>
+      <PropertyDef name="activeTime_endTime">
+        <Property name="dataType">DateTime</Property>
+        <Property name="label">激活时间(至)</Property>
+      </PropertyDef>
+      <PropertyDef name="activeTime">
+        <Property name="dataType">String</Property>
+        <Property name="label">激活时间</Property>
+      </PropertyDef>
+      <PropertyDef name="activeStatus">
+        <Property></Property>
+        <Property name="label">状态</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;enumProvider#getValues&quot;).getResult(&quot;PATROL_TASK_ACTIVE_STATUS&quot;)}</Property>
+        </Property>
+        <Property name="defaultValue">2</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="PatrolTaskItem">
+      <Property name="creationType">com.mr.sa.entity.PatrolTaskItem</Property>
+      <PropertyDef name="id">
+        <Property></Property>
+        <Property name="label">id</Property>
+      </PropertyDef>
+      <PropertyDef name="createdDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">创建日期</Property>
+      </PropertyDef>
+      <PropertyDef name="creator">
+        <Property></Property>
+        <Property name="label">创建人</Property>
+      </PropertyDef>
+      <PropertyDef name="updateDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">修改日期</Property>
+      </PropertyDef>
+      <PropertyDef name="modifier">
+        <Property></Property>
+        <Property name="label">修改人</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolTaskId">
+        <Property></Property>
+        <Property name="label">巡防任务ID</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolStartTime">
+        <Property name="dataType">Time</Property>
+        <Property name="label">巡防开始时间</Property>
+        <Property name="required">true</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolEndTime">
+        <Property name="dataType">Time</Property>
+        <Property name="label">巡防结束时间</Property>
+        <Property name="required">true</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="Org">
+      <Property name="creationType">com.mr.sa.entity.Org</Property>
+      <PropertyDef name="id">
+        <Property></Property>
+        <Property name="label">ID</Property>
+      </PropertyDef>
+      <PropertyDef name="code">
+        <Property></Property>
+        <Property name="label">编码</Property>
+        <Property name="required">true</Property>
+      </PropertyDef>
+      <PropertyDef name="name">
+        <Property></Property>
+        <Property name="label">名称</Property>
+      </PropertyDef>
+      <PropertyDef name="parentId">
+        <Property></Property>
+      </PropertyDef>
+      <PropertyDef name="longitude">
+        <Property></Property>
+        <Property name="label">经度</Property>
+      </PropertyDef>
+      <PropertyDef name="latitude">
+        <Property></Property>
+        <Property name="label">纬度</Property>
+      </PropertyDef>
+      <PropertyDef name="address">
+        <Property></Property>
+        <Property name="label">地址</Property>
+      </PropertyDef>
+      <Reference name="children">
+        <ClientEvent name="beforeLoadData">var parameter=self.get(&quot;parameter&quot;);&#xD;
+ var entity = view.get(&quot;#dsPatrolTaskItem&quot;).getData(&quot;#&quot;); &#xD;
+var selectionPatrolTaskItem = view.get(&quot;#dgPatrolTaskItem&quot;).get(&quot;selection&quot;);&#xD;
+parameter.set(&quot;selectionPatrolTaskItem&quot;,selectionPatrolTaskItem);&#xD;
+</ClientEvent>
+        <Property name="dataType">[SELF]</Property>
+        <Property name="dataProvider">patrolTaskItemRelController#loadChildrenOrg</Property>
+        <Property name="parameter">
+          <Entity>
+            <Property name="parentId">$${this.id}</Property>
+          </Entity>
+        </Property>
+      </Reference>
+      <PropertyDef name="checked">
+        <ClientEvent name="onSet">var orgId = arg.entity.get(&quot;code&quot;);&#xD;
+var selectionPatrolTaskItem = view.get(&quot;#dgPatrolTaskItem&quot;).get(&quot;selection&quot;);&#xD;
+var paraSave = {&#xD;
+	'selectionPatrolTaskItem': selectionPatrolTaskItem,&#xD;
+	&quot;orgId&quot;: orgId&#xD;
+}&#xD;
+&#xD;
+if (arg.value) {&#xD;
+	//view.get(&quot;#aaSaveOrg&quot;).set(&quot;parameter&quot;, paraSave).execute(function(result) {});&#xD;
+	//view.get(&quot;#aaSaveOrgPlan&quot;).set(&quot;parameter&quot;, paraSave).execute(function(result) {});&#xD;
+} else {&#xD;
+	view.get(&quot;#aaDeleteOrg&quot;).set(&quot;parameter&quot;, paraSave).execute(function(result) {&#xD;
+	//view.get(&quot;#aaDeleteOrgPlan&quot;).set(&quot;parameter&quot;, paraSave).execute(function(result) {})&#xD;
+	})&#xD;
+}&#xD;
+&#xD;
+//var paraQueryOrgPlan = {&#xD;
+//	'patrolTaskItemId': patrolTaskItemId&#xD;
+//}&#xD;
+//view.get(&quot;#dsOrgPlan&quot;).set(&quot;parameter&quot;, paraQueryOrgPlan).flushAsync();</ClientEvent>
+        <Property name="dataType">boolean</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="User">
+      <Property name="creationType">com.mr.sa.entity.app.AppUser</Property>
+      <PropertyDef name="checked">
+        <Property name="dataType">boolean</Property>
+        <Property name="label">是否选中</Property>
+      </PropertyDef>
+      <PropertyDef name="username">
+        <Property></Property>
+      </PropertyDef>
+      <PropertyDef name="nickname">
+        <Property></Property>
+        <Property name="label">姓名</Property>
+      </PropertyDef>
+      <PropertyDef name="password">
+        <Property></Property>
+      </PropertyDef>
+      <PropertyDef name="enabled">
+        <Property name="dataType">boolean</Property>
+      </PropertyDef>
+      <PropertyDef name="roleId">
+        <Property></Property>
+        <Property name="label">角色</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;appRoleController#getValuesName&quot;).getResult()}</Property>
+        </Property>
+      </PropertyDef>
+      <PropertyDef name="orgId">
+        <Property></Property>
+        <Property name="label">组织</Property>
+      </PropertyDef>
+      <PropertyDef name="gender">
+        <Property></Property>
+        <Property name="label">性别</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;enumProvider#getValues&quot;).getResult(&quot;GENDER&quot;)}</Property>
+        </Property>
+      </PropertyDef>
+      <PropertyDef name="phone">
+        <Property></Property>
+        <Property name="label">电话</Property>
+      </PropertyDef>
+      <PropertyDef name="mail">
+        <Property></Property>
+        <Property name="label">邮箱</Property>
+      </PropertyDef>
+      <PropertyDef name="address">
+        <Property></Property>
+        <Property name="label">住址</Property>
+      </PropertyDef>
+      <PropertyDef name="remark">
+        <Property></Property>
+        <Property name="label">备注</Property>
+      </PropertyDef>
+      <PropertyDef name="id">
+        <Property></Property>
+        <Property name="label">id</Property>
+      </PropertyDef>
+      <PropertyDef name="createdDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">创建日期</Property>
+      </PropertyDef>
+      <PropertyDef name="creator">
+        <Property></Property>
+        <Property name="label">创建人</Property>
+      </PropertyDef>
+      <PropertyDef name="updateDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">修改日期</Property>
+      </PropertyDef>
+      <PropertyDef name="modifier">
+        <Property></Property>
+        <Property name="label">修改人</Property>
+      </PropertyDef>
+      <PropertyDef name="avatar">
+        <Property></Property>
+        <Property name="label">头像</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="RelPatrolTaskItemOrg">
+      <Property name="creationType">com.mr.sa.entity.rel.RelPatrolTaskItemOrg</Property>
+      <PropertyDef name="id">
+        <Property></Property>
+        <Property name="label">id</Property>
+      </PropertyDef>
+      <PropertyDef name="createdDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">创建日期</Property>
+      </PropertyDef>
+      <PropertyDef name="creator">
+        <Property></Property>
+        <Property name="label">创建人</Property>
+      </PropertyDef>
+      <PropertyDef name="updateDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">修改日期</Property>
+      </PropertyDef>
+      <PropertyDef name="modifier">
+        <Property></Property>
+        <Property name="label">修改人</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolTaskItemId">
+        <Property></Property>
+        <Property name="label">巡防任务ID</Property>
+      </PropertyDef>
+      <PropertyDef name="orgId">
+        <Property></Property>
+        <Property name="label">组织ID</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="RelPatrolTaskItemPoint">
+      <Property name="creationType">com.mr.sa.entity.rel.RelPatrolTaskItemPoint</Property>
+      <PropertyDef name="id">
+        <Property></Property>
+        <Property name="label">id</Property>
+      </PropertyDef>
+      <PropertyDef name="createdDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">创建日期</Property>
+      </PropertyDef>
+      <PropertyDef name="creator">
+        <Property></Property>
+        <Property name="label">创建人</Property>
+      </PropertyDef>
+      <PropertyDef name="updateDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">修改日期</Property>
+      </PropertyDef>
+      <PropertyDef name="modifier">
+        <Property></Property>
+        <Property name="label">修改人</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolTaskItemId">
+        <Property></Property>
+        <Property name="label">巡防任务ID</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolPointId">
+        <Property></Property>
+        <Property name="label">巡防点ID</Property>
+      </PropertyDef>
+      <PropertyDef name="required">
+        <Property name="dataType">boolean</Property>
+        <Property name="label">是否为必扫点</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="RelPatrolTaskItemUser">
+      <Property name="creationType">com.mr.sa.entity.rel.RelPatrolTaskItemUser</Property>
+      <PropertyDef name="patrolTaskItemId">
+        <Property></Property>
+        <Property name="label">巡防任务ID</Property>
+      </PropertyDef>
+      <PropertyDef name="userType">
+        <Property></Property>
+        <Property name="label">巡防人员类型</Property>
+      </PropertyDef>
+      <PropertyDef name="userId">
+        <Property></Property>
+        <Property name="label">巡防人员ID</Property>
+      </PropertyDef>
+      <PropertyDef name="id">
+        <Property></Property>
+        <Property name="label">id</Property>
+      </PropertyDef>
+      <PropertyDef name="createdDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">创建日期</Property>
+      </PropertyDef>
+      <PropertyDef name="creator">
+        <Property></Property>
+        <Property name="label">创建人</Property>
+      </PropertyDef>
+      <PropertyDef name="updateDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">修改日期</Property>
+      </PropertyDef>
+      <PropertyDef name="modifier">
+        <Property></Property>
+        <Property name="label">修改人</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="ConditionPatrolPoint">
+      <PropertyDef name="code">
+        <Property name="dataType">String</Property>
+        <Property name="label">编码</Property>
+      </PropertyDef>
+      <PropertyDef name="name">
+        <Property name="dataType">String</Property>
+        <Property name="label">名称</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolTaskItemId"/>
+      <PropertyDef name="selectionPatrolTaskItem"/>
+    </DataType>
+    <DataType name="PatrolPoint">
+      <Property name="creationType">com.mr.sa.entity.PatrolPoint</Property>
+      <PropertyDef name="id">
+        <Property name="dataType">String</Property>
+      </PropertyDef>
+      <PropertyDef name="code">
+        <Property name="dataType">String</Property>
+        <Property name="label">编码</Property>
+      </PropertyDef>
+      <PropertyDef name="name">
+        <Property name="dataType">String</Property>
+        <Property name="label">名称</Property>
+      </PropertyDef>
+      <PropertyDef name="longitude">
+        <Property name="dataType">String</Property>
+        <Property name="label">经度</Property>
+      </PropertyDef>
+      <PropertyDef name="latitude">
+        <Property name="dataType">String</Property>
+        <Property name="label">纬度</Property>
+      </PropertyDef>
+      <PropertyDef name="createdDate">
+        <Property></Property>
+        <Property name="label">创建日期</Property>
+        <Property name="dataType">DateTime</Property>
+      </PropertyDef>
+      <PropertyDef name="creator">
+        <Property></Property>
+        <Property name="label">创建人</Property>
+      </PropertyDef>
+      <PropertyDef name="updateDate">
+        <Property></Property>
+        <Property name="label">修改日期</Property>
+        <Property name="dataType">DateTime</Property>
+      </PropertyDef>
+      <PropertyDef name="modifier">
+        <Property></Property>
+        <Property name="label">修改人</Property>
+      </PropertyDef>
+      <PropertyDef name="importDetail">
+        <Property></Property>
+        <Property name="label">导入详情</Property>
+      </PropertyDef>
+      <PropertyDef name="checked">
+        <Property name="dataType">boolean</Property>
+        <Property name="label">是否选中</Property>
+      </PropertyDef>
+      <PropertyDef name="required">
+        <Property name="dataType">boolean</Property>
+        <Property name="label">是否为必扫点</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="OrgPlan">
+      <Property name="creationType">com.mr.sa.entity.OrgPlan</Property>
+      <PropertyDef name="orgName">
+        <Property></Property>
+        <Property name="label">单位名称</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolStartTime">
+        <Property name="dataType">DateTime</Property>
+        <Property name="label">巡防开始时间</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolEndTime">
+        <Property name="dataType">DateTime</Property>
+        <Property name="label">巡防结束时间</Property>
+      </PropertyDef>
+      <PropertyDef name="id">
+        <Property></Property>
+        <Property name="label">id</Property>
+      </PropertyDef>
+      <PropertyDef name="createdDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">创建日期</Property>
+      </PropertyDef>
+      <PropertyDef name="creator">
+        <Property></Property>
+        <Property name="label">创建人</Property>
+      </PropertyDef>
+      <PropertyDef name="updateDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">修改日期</Property>
+      </PropertyDef>
+      <PropertyDef name="modifier">
+        <Property></Property>
+        <Property name="label">修改人</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolTaskItemId">
+        <Property></Property>
+        <Property name="label">巡防任务ID</Property>
+      </PropertyDef>
+      <PropertyDef name="orgId">
+        <Property></Property>
+        <Property name="label">单位ID</Property>
+      </PropertyDef>
+      <PropertyDef name="org">
+        <Property name="dataType">Org</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="RelPatrolTaskItemUserAmount">
+      <Property name="creationType">com.mr.sa.entity.rel.RelPatrolTaskItemUserAmount</Property>
+      <PropertyDef name="patrolTaskItemId">
+        <Property></Property>
+        <Property name="label">巡防任务ID</Property>
+      </PropertyDef>
+      <PropertyDef name="orgId">
+        <Property></Property>
+        <Property name="label">组织ID</Property>
+      </PropertyDef>
+      <PropertyDef name="memberAmount">
+        <Property name="dataType">int</Property>
+        <Property name="label">巡防队员</Property>
+      </PropertyDef>
+      <PropertyDef name="copAmount">
+        <Property name="dataType">int</Property>
+        <Property name="label">巡防民警</Property>
+      </PropertyDef>
+      <PropertyDef name="apAmount">
+        <Property name="dataType">int</Property>
+        <Property name="label">巡防辅警</Property>
+      </PropertyDef>
+      <PropertyDef name="id">
+        <Property></Property>
+        <Property name="label">id</Property>
+      </PropertyDef>
+      <PropertyDef name="createdDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">创建日期</Property>
+      </PropertyDef>
+      <PropertyDef name="creator">
+        <Property></Property>
+        <Property name="label">创建人</Property>
+      </PropertyDef>
+      <PropertyDef name="updateDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">修改日期</Property>
+      </PropertyDef>
+      <PropertyDef name="modifier">
+        <Property></Property>
+        <Property name="label">修改人</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="Copy">
+      <PropertyDef name="id">
+        <Property name="dataType">String</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolStartDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">巡防开始日期</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolEndDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">巡防结束日期</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="CopyItem">
+      <PropertyDef name="patrolStartTime">
+        <Property name="dataType">Time</Property>
+        <Property name="label">巡防开始时间</Property>
+        <Property name="required">true</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolEndTime">
+        <Property name="dataType">Time</Property>
+        <Property name="label">巡防结束时间</Property>
+        <Property name="required">true</Property>
+      </PropertyDef>
+    </DataType>
+  </Model>
+  <View>
+    <Property name="packages">font-awesome,colors,entypo</Property>
+    <Property name="title">巡逻任务信息维护</Property>
+    <Container id="ds">
+      <DataSet id="dsPatrolTask">
+        <ClientEvent name="beforeLoadData">var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+self.set(&quot;parameter&quot;, data);</ClientEvent>
+        <Property name="dataProvider">patrolTaskController#query</Property>
+        <Property name="pageSize">20</Property>
+        <Property name="dataType">[PatrolTask]</Property>
+        <Property name="loadMode">lazy</Property>
+      </DataSet>
+      <DataSet id="dsPatrolTaskItem">
+        <ClientEvent name="beforeLoadData">var entity=view.get(&quot;#dsPatrolTask&quot;).getData(&quot;#&quot;);&#xD;
+var patrolTaskId=entity.get(&quot;id&quot;);&#xD;
+var parameter={&#xD;
+	&quot;patrolTaskId_eq&quot;:patrolTaskId&#xD;
+}&#xD;
+self.set(&quot;parameter&quot;, parameter);&#xD;
+</ClientEvent>
+        <Property name="dataProvider">patrolTaskItemController#query</Property>
+        <Property name="pageSize">20</Property>
+        <Property name="dataType">[PatrolTaskItem]</Property>
+        <Property name="loadMode">manual</Property>
+      </DataSet>
+      <DataSet id="dsOrg">
+        <ClientEvent name="beforeLoadData">var entity = view.get(&quot;#dsPatrolTaskItem&quot;).getData(&quot;#&quot;); &#xD;
+var selectionPatrolTaskItem = view.get(&quot;#dgPatrolTaskItem&quot;).get(&quot;selection&quot;);&#xD;
+var paraQuery = {&#xD;
+	'selectionPatrolTaskItem': selectionPatrolTaskItem&#xD;
+}&#xD;
+self.set(&quot;parameter&quot;, paraQuery);</ClientEvent>
+        <Property name="dataProvider">patrolTaskItemRelController#loadOrg</Property>
+        <Property name="dataType">[Org]</Property>
+      </DataSet>
+      <DataSet id="dsUser">
+        <Property name="dataType">[User]</Property>
+        <Property name="dataProvider">userRelController#queryAll</Property>
+        <Property name="loadMode">manual</Property>
+      </DataSet>
+      <DataSet id="dsPatrolPoint">
+        <Property name="dataProvider">patrolPointRelController#query</Property>
+        <Property name="dataType">[PatrolPoint]</Property>
+        <Property name="loadMode">manual</Property>
+        <Property name="pageSize">1000</Property>
+      </DataSet>
+      <DataSet id="dsOrgPlan">
+        <Property name="dataProvider">orgPlanController#query</Property>
+        <Property name="dataType">[OrgPlan]</Property>
+        <Property name="loadMode">manual</Property>
+        <Property name="pageSize">20</Property>
+      </DataSet>
+      <DataSet id="dsUserAmount">
+        <Property name="dataType">RelPatrolTaskItemUserAmount</Property>
+        <Property name="dataProvider">userRelController#queryUserAmount</Property>
+        <Property name="loadMode">manual</Property>
+      </DataSet>
+    </Container>
+    <Container id="action">
+      <UpdateAction id="updateAction">
+        <Property name="successMessage">操作成功!</Property>
+        <Property name="executingMessage">正在保存...</Property>
+        <Property name="dataResolver">patrolTaskController#save</Property>
+        <UpdateItem>
+          <Property name="dataSet">dsPatrolTask</Property>
+        </UpdateItem>
+      </UpdateAction>
+      <UpdateAction id="uaPatrolTaskItem">
+        <Property name="successMessage">操作成功!</Property>
+        <Property name="executingMessage">正在保存...</Property>
+        <Property name="dataResolver">patrolTaskItemController#save</Property>
+        <UpdateItem>
+          <Property name="dataSet">dsPatrolTaskItem</Property>
+        </UpdateItem>
+      </UpdateAction>
+      <AjaxAction id="aaSave">
+        <Property name="service">patrolTaskItemService#save</Property>
+      </AjaxAction>
+      <AjaxAction id="aaCopy">
+        <Property name="service">patrolTaskService#copy</Property>
+      </AjaxAction>
+      <AjaxAction id="aaCopyItem">
+        <Property name="service">patrolTaskItemService#copy</Property>
+      </AjaxAction>
+      <AjaxAction id="aaDeleteOrg">
+        <Property name="service">patrolTaskItemService#deleteOrgModel</Property>
+        <Property name="async">false</Property>
+      </AjaxAction>
+    </Container>
+    <SplitPanel>
+      <Property name="position">60%</Property>
+      <MainControl>
+        <Panel>
+          <Property name="caption">巡防任务项</Property>
+          <Property name="exClassName">green-text</Property>
+          <Buttons/>
+          <Children>
+            <ToolBar>
+              <Property name="fixRight">true</Property>
+              <ToolBarButton>
+                <ClientEvent name="onClick">view.get(&quot;#dsPatrolTaskItem&quot;).flushAsync();</ClientEvent>
+                <Property name="caption">刷新</Property>
+                <Property name="iconClass">fa fa-refresh</Property>
+              </ToolBarButton>
+              <ToolBarButton>
+                <ClientEvent name="onClick">var datas = view.get(&quot;#dsPatrolTaskItem.data&quot;);&#xD;
+var patrolTaskId=view.get(&quot;#dsPatrolTask&quot;).getData(&quot;#&quot;).get(&quot;id&quot;);&#xD;
+var entity=datas.insert();&#xD;
+entity.set(&quot;patrolTaskId&quot;,patrolTaskId);&#xD;
+view.get(&quot;#dialogPatrolTaskItem&quot;).show();&#xD;
+arg.processDefault=false;</ClientEvent>
+                <Property name="caption">新增</Property>
+                <Property name="iconClass">fa fa-plus</Property>
+              </ToolBarButton>
+              <ToolBarButton>
+                <ClientEvent name="onClick">var data=view.get(&quot;#dsPatrolTaskItem.data&quot;);&#xD;
+if(data.current){&#xD;
+view.get(&quot;#dialogPatrolTaskItem&quot;).show();&#xD;
+}else{&#xD;
+dorado.MessageBox.alert(&quot;当前表没有信息可供编辑!&quot;);&#xD;
+}</ClientEvent>
+                <Property name="caption">修改</Property>
+                <Property name="iconClass">fa fa-pencil-square-o</Property>
+              </ToolBarButton>
+              <ToolBarButton>
+                <ClientEvent name="onClick">var updateAction = view.get(&quot;#uaPatrolTaskItem&quot;);&#xD;
+var selection = view.get(&quot;#dgPatrolTaskItem&quot;).get(&quot;selection&quot;);&#xD;
+&#xD;
+if (0 != selection.length) {&#xD;
+    dorado.MessageBox.confirm(&quot;确认操作吗?&quot;, function(){&#xD;
+    &#xD;
+        for (var i = 0; i &lt; selection.length; i++) {&#xD;
+            var select = selection[i];&#xD;
+            select.remove();&#xD;
+        }&#xD;
+        &#xD;
+        updateAction.execute();&#xD;
+        view.get(&quot;#dsPatrolTaskItem&quot;).flushAsync();&#xD;
+    })&#xD;
+    &#xD;
+}&#xD;
+else {&#xD;
+    dorado.MessageBox.alert(&quot;请选择需要操作的记录！&quot;);&#xD;
+}</ClientEvent>
+                <Property name="iconClass">fa fa-trash-o</Property>
+                <Property name="caption">删除(批量)</Property>
+              </ToolBarButton>
+              <ToolBarButton>
+                <ClientEvent name="onClick">var selection = view.get(&quot;#dgPatrolTaskItem&quot;).get(&quot;selection&quot;);
+
+if(0 != selection.length) {
+	view.get(&quot;#dsOrg&quot;).flush();
+	view.get(&quot;#dsOrgPlan&quot;).clear();
+	view.get(&quot;#dsPatrolPoint&quot;).clear();
+	view.get(&quot;#dialogPatrolTaskItemConfig&quot;).show();
+	
+} else {
+dorado.MessageBox.alert(&quot;请选择需要操作的记录！&quot;);
+}
+
+
+
+
+
+
+</ClientEvent>
+                <Property name="caption">巡防设置(批量)</Property>
+                <Property name="iconClass">fa fa-sitemap</Property>
+              </ToolBarButton>
+              <ToolBarButton>
+                <ClientEvent name="onClick">var selection = view.get(&quot;#dgPatrolTaskItem&quot;).get(&quot;selection&quot;);&#xD;
+&#xD;
+if(0 != selection.length) {&#xD;
+view.get(&quot;#dialogCopyItem&quot;).show();&#xD;
+&#xD;
+} else {&#xD;
+dorado.MessageBox.alert(&quot;请选择需要操作的记录！&quot;);&#xD;
+}&#xD;
+&#xD;
+&#xD;
+</ClientEvent>
+                <Property name="caption">复制(批量)</Property>
+                <Property name="iconClass">fa fa-copy</Property>
+                <Property name="hideMode">display</Property>
+                <Property name="visible">false</Property>
+              </ToolBarButton>
+            </ToolBar>
+            <DataGrid id="dgPatrolTaskItem">
+              <Property name="dataSet">dsPatrolTaskItem</Property>
+              <Property name="dataType">PatrolTaskItem</Property>
+              <Property name="selectionMode">multiRows</Property>
+              <Property name="readOnly">true</Property>
+              <RowSelectorColumn/>
+              <RowNumColumn/>
+              <DataColumn name="patrolStartTime">
+                <Property name="property">patrolStartTime</Property>
+                <Property name="align">center</Property>
+                <Property name="required">true</Property>
+              </DataColumn>
+              <DataColumn name="patrolEndTime">
+                <Property name="property">patrolEndTime</Property>
+                <Property name="align">center</Property>
+                <Property name="required">true</Property>
+              </DataColumn>
+              <DataColumn name="id">
+                <Property name="property">id</Property>
+              </DataColumn>
+            </DataGrid>
+            <Dialog id="dialogPatrolTaskItem">
+              <ClientEvent name="onClose">var data=view.get(&quot;#dsPatrolTaskItem&quot;).getData();&#xD;
+data.cancel();&#xD;
+</ClientEvent>
+              <Property name="center">true</Property>
+              <Property name="maximizeable">true</Property>
+              <Property name="width">1024</Property>
+              <Property name="height">500</Property>
+              <Property name="modal">true</Property>
+              <Property name="closeable">true</Property>
+              <Property name="caption">巡防任务项详情</Property>
+              <Buttons>
+                <Button>
+                  <ClientEvent name="onClick">var data=view.get(&quot;#dsPatrolTaskItem&quot;).getData();
+var dialog=view.get(&quot;#dialogPatrolTaskItem&quot;);
+data.cancel();
+dialog.hide();</ClientEvent>
+                  <Property name="caption">关闭</Property>
+                  <Property name="iconClass">fa fa-arrow-circle-o-left</Property>
+                  <Property name="ui">decline</Property>
+                </Button>
+                <Button>
+                  <ClientEvent name="onClick">var dialog=view.get(&quot;#dialogPatrolTaskItem&quot;);&#xD;
+var action=view.get(&quot;#uaPatrolTaskItem&quot;);&#xD;
+action.execute(function(){&#xD;
+dialog.hide();&#xD;
+view.get(&quot;#dsPatrolTaskItem&quot;).flushAsync(); &#xD;
+})&#xD;
+</ClientEvent>
+                  <Property name="caption">确定</Property>
+                  <Property name="iconClass">fa fa-check-circle</Property>
+                  <Property name="ui">highlight</Property>
+                </Button>
+              </Buttons>
+              <Children>
+                <AutoForm>
+                  <Property name="labelWidth">100</Property>
+                  <Property name="dataSet">dsPatrolTaskItem</Property>
+                  <Property name="cols">*,*</Property>
+                  <Property name="labelAlign">center</Property>
+                  <Property name="showHint">false</Property>
+                  <Property name="showHintMessage">true</Property>
+                  <AutoFormElement name="patrolStartTime">
+                    <Property name="name">patrolStartTime</Property>
+                    <Property name="property">patrolStartTime</Property>
+                    <Property name="label">巡访开始时间</Property>
+                    <Editor>
+                      <DateTimeSpinner>
+                        <ClientEvent name="onCreate">self.set(&quot;value&quot;, new Date());&#xD;
+</ClientEvent>
+                        <Property name="type">time</Property>
+                      </DateTimeSpinner>
+                    </Editor>
+                  </AutoFormElement>
+                  <AutoFormElement name="patrolEndTime">
+                    <Property name="name">patrolEndTime</Property>
+                    <Property name="property">patrolEndTime</Property>
+                    <Property name="label">巡访结束时间</Property>
+                    <Editor>
+                      <DateTimeSpinner>
+                        <ClientEvent name="onCreate">self.set(&quot;value&quot;, new Date());&#xD;
+</ClientEvent>
+                        <Property name="type">time</Property>
+                      </DateTimeSpinner>
+                    </Editor>
+                  </AutoFormElement>
+                </AutoForm>
+              </Children>
+              <Tools/>
+            </Dialog>
+            <Dialog id="dialogPatrolTaskItemConfig">
+              <ClientEvent name="onClose">var data=view.get(&quot;#dsPatrolTaskItem&quot;).getData();&#xD;
+data.cancel();&#xD;
+&#xD;
+var node=view.get(&quot;#dtOrg&quot;).get(&quot;firstNode&quot;);&#xD;
+node.doCollapse();</ClientEvent>
+              <ClientEvent name="onShow">var orgId=&quot;000000&quot;;&#xD;
+var selectionPatrolTaskItem = view.get(&quot;#dgPatrolTaskItem&quot;).get(&quot;selection&quot;);&#xD;
+var para={&#xD;
+	&quot;orgId&quot;:orgId,&#xD;
+	&quot;selectionPatrolTaskItem&quot;:selectionPatrolTaskItem&#xD;
+}&#xD;
+&#xD;
+view.get(&quot;#dsUser&quot;).set(&quot;parameter&quot;, para).flushAsync();&#xD;
+//view.get(&quot;#dsPatrolPoint&quot;).set(&quot;parameter&quot;, para).flushAsync();&#xD;
+view.get(&quot;#dsUserAmount&quot;).set(&quot;parameter&quot;, para).flushAsync();&#xD;
+&#xD;
+</ClientEvent>
+              <Property name="center">true</Property>
+              <Property name="maximizeable">true</Property>
+              <Property name="width">1200</Property>
+              <Property name="height">600</Property>
+              <Property name="modal">true</Property>
+              <Property name="closeable">true</Property>
+              <Property name="caption">巡防任务项配置</Property>
+              <Property name="maximized">true</Property>
+              <Buttons>
+                <Button>
+                  <ClientEvent name="onClick">var dialog=view.get(&quot;#dialogPatrolTaskItemConfig&quot;);
+dialog.hide();</ClientEvent>
+                  <Property name="caption">关闭</Property>
+                  <Property name="iconClass">fa fa-arrow-circle-o-left</Property>
+                  <Property name="ui">decline</Property>
+                </Button>
+                <Button>
+                  <ClientEvent name="onClick">var node = view.get(&quot;#dtOrg&quot;).getCurrentItem().get(&quot;data&quot;);&#xD;
+var checked = node.get(&quot;checked&quot;);&#xD;
+var orgId = node.get(&quot;code&quot;);&#xD;
+if (checked) {&#xD;
+	var selectionPatrolTaskItem = view.get(&quot;#dgPatrolTaskItem&quot;).get(&quot;selection&quot;);&#xD;
+	var dsUser = view.get(&quot;#dsUser&quot;).getData();&#xD;
+	var dsPatrolPoint = view.get(&quot;#dsPatrolPoint&quot;).getData();&#xD;
+	var formUserAmount= view.get(&quot;#formUserAmount.entity&quot;);&#xD;
+	var paraSave = {&#xD;
+				'orgId': orgId,&#xD;
+				'selectionPatrolTaskItem': selectionPatrolTaskItem,&#xD;
+				'dsUser': dsUser,&#xD;
+				'dsPatrolPoint': dsPatrolPoint,&#xD;
+				'formUserAmount':formUserAmount&#xD;
+			}&#xD;
+	view.get(&quot;#aaSave&quot;).set(&quot;parameter&quot;, paraSave).execute(function(){&#xD;
+		view.get(&quot;#dsUser&quot;).flushAsync();&#xD;
+	});&#xD;
+		&#xD;
+	&#xD;
+}&#xD;
+&#xD;
+else {&#xD;
+	throw new dorado.Exception(&quot;请先选择单位&quot;);&#xD;
+}&#xD;
+&#xD;
+ &#xD;
+</ClientEvent>
+                  <Property name="caption">确定</Property>
+                  <Property name="iconClass">fa fa-check-circle</Property>
+                  <Property name="ui">highlight</Property>
+                </Button>
+              </Buttons>
+              <Children>
+                <VerticalTabControl>
+                  <Property name="tabColumnWidth">120</Property>
+                  <ControlTab>
+                    <Property name="caption">人员</Property>
+                    <Property name="iconClass">fa fa-users</Property>
+                    <SplitPanel>
+                      <Property name="position">30%</Property>
+                      <MainControl>
+                        <Panel>
+                          <Buttons/>
+                          <Children>
+                            <GroupBox>
+                              <Property name="caption">按人员数量设置</Property>
+                              <Buttons/>
+                              <Children>
+                                <AutoForm id="formUserAmount">
+                                  <Property name="cols">*,*,*</Property>
+                                  <Property name="dataSet">dsUserAmount</Property>
+                                  <Property name="createPrivateDataSet">true</Property>
+                                  <Property name="showHint">false</Property>
+                                  <AutoFormElement>
+                                    <Property name="name">memberAmount</Property>
+                                    <Property name="property">memberAmount</Property>
+                                    <Editor/>
+                                  </AutoFormElement>
+                                  <AutoFormElement>
+                                    <Property name="name">copAmount</Property>
+                                    <Property name="property">copAmount</Property>
+                                    <Editor/>
+                                  </AutoFormElement>
+                                  <AutoFormElement>
+                                    <Property name="name">apAmount</Property>
+                                    <Property name="property">apAmount</Property>
+                                    <Editor/>
+                                  </AutoFormElement>
+                                </AutoForm>
+                              </Children>
+                            </GroupBox>
+                            <GroupBox>
+                              <Property name="caption">按人员详情设置</Property>
+                              <Buttons/>
+                              <Children>
+                                <ToolBar>
+                                  <ToolBarButton>
+                                    <ClientEvent name="onClick">var dsUser=view.get(&quot;#dsUser&quot;).getData();&#xD;
+dsUser.each(function(entity){&#xD;
+	entity.set(&quot;checked&quot;,self.get(&quot;toggled&quot;))&#xD;
+}); </ClientEvent>
+                                    <Property name="caption">全选</Property>
+                                    <Property name="iconClass">fa fa-check</Property>
+                                    <Property name="toggleable">true</Property>
+                                    <Property name="tags">op</Property>
+                                  </ToolBarButton>
+                                </ToolBar>
+                                <DataGrid id="dgUser">
+                                  <Property name="dataSet">dsUser</Property>
+                                  <Property name="selectionMode">multiRows</Property>
+                                  <Property name="highlightCurrentRow">false</Property>
+                                  <Property name="highlightHoverRow">false</Property>
+                                  <Property name="highlightSelectedRow">false</Property>
+                                  <Property name="groupProperty">roleId</Property>
+                                  <RowNumColumn>
+                                    <Property name="width">60</Property>
+                                  </RowNumColumn>
+                                  <DataColumn>
+                                    <Property name="property">checked</Property>
+                                    <Property name="align">center</Property>
+                                    <Property name="name">checked</Property>
+                                  </DataColumn>
+                                  <DataColumn>
+                                    <ClientEvent name="onRenderCell">$(arg.dom).empty().xCreate(&#xD;
+			{&#xD;
+				tagName : &quot;IMG&quot;,&#xD;
+				src : arg.data.get(&quot;avatar&quot;),&#xD;
+				//style : &quot;margin: 2px&quot;&#xD;
+				style : &quot;width: 30px; height: 30px; margin: 1px&quot;&#xD;
+			});&#xD;
+&#xD;
+	dorado.TipManager.initTip(arg.dom.parentNode, {&#xD;
+		content : {&#xD;
+			tagName : &quot;IMG&quot;,&#xD;
+			src : arg.data.get(&quot;avatar&quot;),&#xD;
+			style : &quot;width: 120px; height: 120px; margin: 2px&quot;&#xD;
+		},&#xD;
+		arrowDirection : &quot;top&quot;,&#xD;
+		arrowAlign : &quot;left&quot;&#xD;
+	});</ClientEvent>
+                                    <Property name="property">avatar</Property>
+                                    <Property name="align">center</Property>
+                                    <Property name="caption">头像</Property>
+                                    <Property name="width">80</Property>
+                                    <Property name="name">avatar</Property>
+                                    <Property name="readOnly">true</Property>
+                                  </DataColumn>
+                                  <DataColumn>
+                                    <Property name="property">nickname</Property>
+                                    <Property name="name">nickname</Property>
+                                    <Property name="align">center</Property>
+                                    <Property name="readOnly">true</Property>
+                                  </DataColumn>
+                                  <DataColumn name="gender">
+                                    <Property name="property">gender</Property>
+                                    <Property name="align">center</Property>
+                                    <Property name="readOnly">true</Property>
+                                  </DataColumn>
+                                  <DataColumn name="phone">
+                                    <Property name="property">phone</Property>
+                                    <Property name="align">center</Property>
+                                    <Property name="readOnly">true</Property>
+                                  </DataColumn>
+                                  <DataColumn name="roleId">
+                                    <Property name="property">roleId</Property>
+                                    <Property name="align">center</Property>
+                                  </DataColumn>
+                                </DataGrid>
+                              </Children>
+                            </GroupBox>
+                          </Children>
+                          <Tools/>
+                        </Panel>
+                      </MainControl>
+                      <SideControl>
+                        <Container>
+                          <ToolBar>
+                            <ToolBarLabel>
+                              <Property name="text">选择组织</Property>
+                              <Property name="exClassName">blue-text</Property>
+                            </ToolBarLabel>
+                            <Fill/>
+                            <Tip>
+                              <Property name="floating">false</Property>
+                              <Property name="text">点击组织联动巡防人员</Property>
+                            </Tip>
+                          </ToolBar>
+                          <ToolBar>
+                            <Property name="visible">false</Property>
+                            <Property name="hideMode">display</Property>
+                            <Fill/>
+                            <ToolBarButton>
+                              <ClientEvent name="onClick">//var bc=view.get(&quot;#dtOrg&quot;).get(&quot;bindingConfigs&quot;);&#xD;
+//bc.set(&quot;expandLevel&quot;,&quot;6&quot;);&#xD;
+//console.log(bc);&#xD;
+//get(&quot;code&quot;).set(&quot;expandLevel&quot;,6)&#xD;
+//view.get(&quot;#dtOrg&quot;).get(&quot;root&quot;).doExpand();</ClientEvent>
+                              <Property name="caption">展开全部节点</Property>
+                              <Property name="iconClass">fa fa-expand</Property>
+                              <Property name="visible">false</Property>
+                              <Property name="hideMode">display</Property>
+                            </ToolBarButton>
+                            <ToolBarButton>
+                              <ClientEvent name="onClick">var node=view.get(&quot;#dtOrg&quot;).get(&quot;firstNode&quot;);&#xD;
+node.doCollapse();</ClientEvent>
+                              <Property name="caption">收起全部节点</Property>
+                              <Property name="iconClass">fa fa-compress</Property>
+                            </ToolBarButton>
+                          </ToolBar>
+                          <DataTree id="dtOrg" layoutConstraint="padding:15">
+                            <ClientEvent name="onDataRowClick">var node=view.get(&quot;#dtOrg&quot;).getCurrentItem().get(&quot;data&quot;);&#xD;
+var orgId=node.get(&quot;code&quot;);&#xD;
+var selectionPatrolTaskItem = view.get(&quot;#dgPatrolTaskItem&quot;).get(&quot;selection&quot;);&#xD;
+var para={&#xD;
+	'selectionPatrolTaskItem': selectionPatrolTaskItem,&#xD;
+	&quot;orgId&quot;:orgId&#xD;
+}&#xD;
+&#xD;
+view.get(&quot;#dsUser&quot;).set(&quot;parameter&quot;, para).flushAsync();&#xD;
+view.get(&quot;#dsPatrolPoint&quot;).set(&quot;parameter&quot;, para).flushAsync();&#xD;
+view.get(&quot;#dsUserAmount&quot;).set(&quot;parameter&quot;, para).flushAsync();</ClientEvent>
+                            <ClientEvent name="onRenderNode">var data = arg.node.get(&quot;data&quot;);
+//var icon = data.get(&quot;icon&quot;) || &quot;&quot;;
+
+var icon='fa fa-building yellow-text';
+arg.node.set(&quot;iconClass&quot;, icon);
+$(arg.dom).text(data.get(&quot;name&quot;) || &quot;&quot;);
+</ClientEvent>
+                            <Property name="dataSet">dsOrg</Property>
+                            <Property name="currentNodeDataPath">currentNode</Property>
+                            <Property name="showLines">true</Property>
+                            <Property name="selectionMode">singleRow</Property>
+                            <Property name="useNativeScrollbars">true</Property>
+                            <BindingConfigs>
+                              <BindingConfig>
+                                <Property name="childrenProperty">children</Property>
+                                <Property name="labelProperty">name</Property>
+                                <Property name="recursive">true</Property>
+                                <Property name="tipProperty">address</Property>
+                                <Property name="name">code</Property>
+                                <Property name="checkable">true</Property>
+                                <Property name="checkedProperty">checked</Property>
+                                <Property name="autoCheckChildren">false</Property>
+                                <Property name="expandLevel">3</Property>
+                              </BindingConfig>
+                            </BindingConfigs>
+                          </DataTree>
+                        </Container>
+                      </SideControl>
+                    </SplitPanel>
+                  </ControlTab>
+                  <ControlTab>
+                    <ClientEvent name="onClick">var data = view.get(&quot;#formConditionPatrolPoint.entity&quot;);
+var selectionPatrolTaskItem = view.get(&quot;#dgPatrolTaskItem&quot;).get(&quot;selection&quot;)[0].getData().id;
+data.set(&quot;patrolTaskItemId&quot;,selectionPatrolTaskItem);
+view.get(&quot;#dsPatrolPoint&quot;).set(&quot;parameter&quot;, data).flushAsync();</ClientEvent>
+                    <Property name="caption">巡防点</Property>
+                    <Property name="iconClass">icon-cone</Property>
+                    <Panel>
+                      <Buttons/>
+                      <Children>
+                        <AutoForm id="formConditionPatrolPoint">
+                          <ClientEvent name="onKeyDown">if (arg.keyCode === 13) {&#xD;
+window.clearTimeout(self.urlQueryTimeout);&#xD;
+self.urlQueryTimeout = window.setTimeout(function() {&#xD;
+&#xD;
+var data = view.get(&quot;#formConditionPatrolPoint.entity&quot;);&#xD;
+var selectionPatrolTaskItem = view.get(&quot;#dgPatrolTaskItem&quot;).get(&quot;selection&quot;)[0].getData().id;&#xD;
+data.set(&quot;patrolTaskItemId&quot;,selectionPatrolTaskItem);&#xD;
+view.get(&quot;#dsPatrolPoint&quot;).set(&quot;parameter&quot;, data).flushAsync();&#xD;
+&#xD;
+}, 250);&#xD;
+}</ClientEvent>
+                          <Property name="labelWidth">100</Property>
+                          <Property name="cols">*,*,*,*</Property>
+                          <Property name="createPrivateDataSet">true</Property>
+                          <Property name="dataType">ConditionPatrolPoint</Property>
+                          <Property name="labelAlign">center</Property>
+                          <Property name="showHint">false</Property>
+                          <AutoFormElement id="batchCode">
+                            <Property name="name">code</Property>
+                            <Property name="property">code</Property>
+                            <Property name="trigger">triggerSearchCode</Property>
+                            <Editor/>
+                          </AutoFormElement>
+                          <AutoFormElement id="batchName">
+                            <Property name="name">name</Property>
+                            <Property name="property">name</Property>
+                            <Property name="trigger">triggerSearchName</Property>
+                            <Editor/>
+                          </AutoFormElement>
+                          <AutoFormElement>
+                            <Property name="name">patrolTaskItemId</Property>
+                            <Property name="property">patrolTaskItemId</Property>
+                            <Property name="hideMode">display</Property>
+                            <Property name="visible">false</Property>
+                            <Editor/>
+                          </AutoFormElement>
+                        </AutoForm>
+                        <ToolBar>
+                          <Property name="fixRight">true</Property>
+                          <ToolBarButton>
+                            <ClientEvent name="onClick">var data = view.get(&quot;#formConditionPatrolPoint.entity&quot;);&#xD;
+var selectionPatrolTaskItem = view.get(&quot;#dgPatrolTaskItem&quot;).get(&quot;selection&quot;)[0].getData().id;&#xD;
+data.set(&quot;patrolTaskItemId&quot;,selectionPatrolTaskItem);&#xD;
+view.get(&quot;#dsPatrolPoint&quot;).set(&quot;parameter&quot;, data).flushAsync();</ClientEvent>
+                            <Property name="caption">查询</Property>
+                            <Property name="iconClass">fa fa-search</Property>
+                          </ToolBarButton>
+                          <ToolBarButton>
+                            <ClientEvent name="onClick">var dsPatrolPoint=view.get(&quot;#dsPatrolPoint&quot;).getData();&#xD;
+dsPatrolPoint.each(function(entity){&#xD;
+	entity.set(&quot;checked&quot;,self.get(&quot;toggled&quot;))&#xD;
+}); </ClientEvent>
+                            <Property name="caption">全选</Property>
+                            <Property name="iconClass">fa fa-check</Property>
+                            <Property name="toggleable">true</Property>
+                            <Property name="tags">op</Property>
+                          </ToolBarButton>
+                          <Fill/>
+                          <DataPilot>
+                            <Property name="dataSet">dsPatrolPoint</Property>
+                            <Property name="itemCodes">pages,pageSize</Property>
+                          </DataPilot>
+                        </ToolBar>
+                        <DataGrid id="dgPatrolPoint">
+                          <Property name="dataSet">dsPatrolPoint</Property>
+                          <Property name="selectionMode">multiRows</Property>
+                          <Property name="highlightCurrentRow">false</Property>
+                          <RowNumColumn>
+                            <Property name="width">60</Property>
+                          </RowNumColumn>
+                          <DataColumn name="checked">
+                            <Property name="property">checked</Property>
+                            <Property name="align">center</Property>
+                          </DataColumn>
+                          <DataColumn name="编码">
+                            <Property name="caption">编码</Property>
+                            <Property name="property">code</Property>
+                            <Property name="align">center</Property>
+                            <Property name="readOnly">true</Property>
+                          </DataColumn>
+                          <DataColumn name="名称">
+                            <Property name="caption">名称</Property>
+                            <Property name="property">name</Property>
+                            <Property name="align">center</Property>
+                            <Property name="readOnly">true</Property>
+                          </DataColumn>
+                          <DataColumn name="longitude">
+                            <Property name="property">longitude</Property>
+                            <Property name="align">center</Property>
+                          </DataColumn>
+                          <DataColumn name="latitude">
+                            <Property name="property">latitude</Property>
+                            <Property name="align">center</Property>
+                          </DataColumn>
+                          <DataColumn name="required">
+                            <Property name="property">required</Property>
+                            <Property name="align">center</Property>
+                          </DataColumn>
+                        </DataGrid>
+                        <Trigger id="triggerSearchCode">
+                          <ClientEvent name="onExecute">var taBatchInput=view.get(&quot;#taBatchInputCode&quot;);&#xD;
+var fpBatchInput=view.get(&quot;#fpBatchInputCode&quot;);&#xD;
+&#xD;
+fpBatchInput.show({&#xD;
+  anchorTarget: view.get(&quot;#batchCode&quot;),&#xD;
+  vAlign: &quot;bottom&quot;,&#xD;
+  offsetLeft: 100&#xD;
+});&#xD;
+&#xD;
+taBatchInput.set(&quot;text&quot;,&quot;&quot;);&#xD;
+&#xD;
+arg.returnValue = false;&#xD;
+</ClientEvent>
+                          <Property name="iconClass">fa fa-list-ol</Property>
+                        </Trigger>
+                        <FloatPanel id="fpBatchInputCode">
+                          <Property name="width">190</Property>
+                          <Property name="showAnimateType">slide</Property>
+                          <Property name="shadowMode">sides</Property>
+                          <Property name="closeable">true</Property>
+                          <Property name="showCaptionBar">true</Property>
+                          <Property name="height">300</Property>
+                          <Property name="caption">巡防点ID列表(一行一个)</Property>
+                          <Buttons>
+                            <Button>
+                              <ClientEvent name="onClick">var taBatchInputCode=view.get(&quot;#taBatchInputCode&quot;);&#xD;
+var batchInputCode=taBatchInputCode.get(&quot;text&quot;);&#xD;
+var codeResult=batchInputCode.replace(/\n/g,&quot;,&quot;);&#xD;
+view.get(&quot;#formConditionPatrolPoint.entity&quot;).set(&quot;code&quot;,codeResult);&#xD;
+&#xD;
+var fpBatchInputCode=view.get(&quot;#fpBatchInputCode&quot;);&#xD;
+fpBatchInputCode.hide();</ClientEvent>
+                              <Property name="caption">确定</Property>
+                              <Property name="ui">highlight</Property>
+                            </Button>
+                          </Buttons>
+                          <Children>
+                            <TextArea id="taBatchInputCode"/>
+                          </Children>
+                          <Tools/>
+                        </FloatPanel>
+                        <Trigger id="triggerSearchName">
+                          <ClientEvent name="onExecute">var taBatchInput=view.get(&quot;#taBatchInputName&quot;);&#xD;
+var fpBatchInput=view.get(&quot;#fpBatchInputName&quot;);&#xD;
+&#xD;
+fpBatchInput.show({&#xD;
+  anchorTarget: view.get(&quot;#batchName&quot;),&#xD;
+  vAlign: &quot;bottom&quot;,&#xD;
+  offsetLeft: 100&#xD;
+});&#xD;
+&#xD;
+taBatchInput.set(&quot;text&quot;,&quot;&quot;);&#xD;
+&#xD;
+arg.returnValue = false;&#xD;
+</ClientEvent>
+                          <Property name="iconClass">fa fa-list-ol</Property>
+                        </Trigger>
+                        <FloatPanel id="fpBatchInputName">
+                          <Property name="width">190</Property>
+                          <Property name="showAnimateType">slide</Property>
+                          <Property name="shadowMode">sides</Property>
+                          <Property name="closeable">true</Property>
+                          <Property name="showCaptionBar">true</Property>
+                          <Property name="height">300</Property>
+                          <Property name="caption">巡防点名称列表(一行一个)</Property>
+                          <Buttons>
+                            <Button>
+                              <ClientEvent name="onClick">var taBatchInputName=view.get(&quot;#taBatchInputName&quot;);&#xD;
+var batchInputName=taBatchInputName.get(&quot;text&quot;);&#xD;
+var nameResult=batchInputName.replace(/\n/g,&quot;,&quot;);&#xD;
+view.get(&quot;#formConditionPatrolPoint.entity&quot;).set(&quot;name&quot;,nameResult);&#xD;
+&#xD;
+var fpBatchInputName=view.get(&quot;#fpBatchInputName&quot;);&#xD;
+fpBatchInputName.hide();</ClientEvent>
+                              <Property name="caption">确定</Property>
+                              <Property name="ui">highlight</Property>
+                            </Button>
+                          </Buttons>
+                          <Children>
+                            <TextArea id="taBatchInputName"/>
+                          </Children>
+                          <Tools/>
+                        </FloatPanel>
+                      </Children>
+                      <Tools/>
+                    </Panel>
+                  </ControlTab>
+                  <ControlTab>
+                    <Property name="caption">单位已有任务</Property>
+                    <Property name="iconClass">icon-clipboard</Property>
+                    <DataGrid>
+                      <Property name="dataSet">dsOrgPlan</Property>
+                      <Property name="selectionMode">multiRows</Property>
+                      <Property name="highlightCurrentRow">false</Property>
+                      <Property name="highlightHoverRow">false</Property>
+                      <Property name="highlightSelectedRow">false</Property>
+                      <Property name="readOnly">true</Property>
+                      <RowNumColumn>
+                        <Property name="width">60</Property>
+                      </RowNumColumn>
+                      <DataColumn name="orgName">
+                        <Property name="property">org.name</Property>
+                        <Property name="align">center</Property>
+                      </DataColumn>
+                      <DataColumn name="patrolStartTime">
+                        <Property name="property">patrolStartTime</Property>
+                        <Property name="align">center</Property>
+                      </DataColumn>
+                      <DataColumn name="patrolEndTime">
+                        <Property name="property">patrolEndTime</Property>
+                        <Property name="align">center</Property>
+                      </DataColumn>
+                    </DataGrid>
+                  </ControlTab>
+                </VerticalTabControl>
+              </Children>
+              <Tools/>
+            </Dialog>
+            <Dialog id="dialogCopyItem">
+              <ClientEvent name="onClose">var data=view.get(&quot;#dsPatrolTask&quot;).getData();&#xD;
+var dialog=view.get(&quot;#dialogCopy&quot;);&#xD;
+data.cancel();&#xD;
+dialog.hide();</ClientEvent>
+              <Property name="center">true</Property>
+              <Property name="maximizeable">true</Property>
+              <Property name="width">1024</Property>
+              <Property name="height">400</Property>
+              <Property name="modal">true</Property>
+              <Property name="closeable">true</Property>
+              <Property name="caption">复制任务项</Property>
+              <Buttons>
+                <Button>
+                  <ClientEvent name="onClick">var data=view.get(&quot;#dsPatrolTaskItem&quot;).getData();
+var dialog=view.get(&quot;#dialogCopyItem&quot;);
+data.cancel();
+dialog.hide();</ClientEvent>
+                  <Property name="caption">关闭</Property>
+                  <Property name="iconClass">fa fa-arrow-circle-o-left</Property>
+                  <Property name="ui">decline</Property>
+                </Button>
+                <Button>
+                  <ClientEvent name="onClick">var selection = view.get(&quot;#dgPatrolTaskItem&quot;).get(&quot;selection&quot;);&#xD;
+&#xD;
+var entity = view.get(&quot;#dgPatrolTaskItem&quot;).getCurrentItem();&#xD;
+var patrolTaskItemId = entity.get(&quot;id&quot;);&#xD;
+var copy = view.get(&quot;#formCopyItem.entity&quot;);&#xD;
+&#xD;
+var parameter={&#xD;
+	&quot;selection&quot;:selection,&#xD;
+	&quot;id&quot;:patrolTaskItemId,&#xD;
+	&quot;patrolStartTime&quot;:copy.get(&quot;patrolStartTime&quot;),&#xD;
+	&quot;patrolEndTime&quot;:copy.get(&quot;patrolEndTime&quot;)&#xD;
+}&#xD;
+view.get(&quot;#aaCopyItem&quot;).set(&quot;parameter&quot;, parameter).execute(function(result) {&#xD;
+    view.get(&quot;#dialogCopyItem&quot;).hide();&#xD;
+    with(view.get(&quot;#dsPatrolTaskItem&quot;)) {&#xD;
+        flushAsync();&#xD;
+    }&#xD;
+});</ClientEvent>
+                  <Property name="caption">确定</Property>
+                  <Property name="iconClass">fa fa-check-circle</Property>
+                  <Property name="ui">highlight</Property>
+                </Button>
+              </Buttons>
+              <Children>
+                <AutoForm id="formCopyItem">
+                  <Property name="labelWidth">100</Property>
+                  <Property name="cols">*,*</Property>
+                  <Property name="labelAlign">center</Property>
+                  <Property name="showHint">false</Property>
+                  <Property name="showHintMessage">true</Property>
+                  <Property name="dataType">CopyItem</Property>
+                  <Property name="createPrivateDataSet">true</Property>
+                  <AutoFormElement name="patrolStartTime">
+                    <Property name="name">patrolStartTime</Property>
+                    <Property name="property">patrolStartTime</Property>
+                    <Property name="label">巡访开始时间</Property>
+                    <Editor>
+                      <DateTimeSpinner>
+                        <ClientEvent name="onCreate">self.set(&quot;value&quot;, new Date());&#xD;
+</ClientEvent>
+                        <Property name="type">time</Property>
+                      </DateTimeSpinner>
+                    </Editor>
+                  </AutoFormElement>
+                  <AutoFormElement name="patrolEndTime">
+                    <Property name="name">patrolEndTime</Property>
+                    <Property name="property">patrolEndTime</Property>
+                    <Property name="label">巡访结束时间</Property>
+                    <Editor>
+                      <DateTimeSpinner>
+                        <ClientEvent name="onCreate">self.set(&quot;value&quot;, new Date());&#xD;
+</ClientEvent>
+                        <Property name="type">time</Property>
+                      </DateTimeSpinner>
+                    </Editor>
+                  </AutoFormElement>
+                </AutoForm>
+              </Children>
+              <Tools/>
+            </Dialog>
+          </Children>
+          <Tools/>
+        </Panel>
+      </MainControl>
+      <SideControl>
+        <Panel>
+          <Property name="caption">巡防任务</Property>
+          <Buttons/>
+          <Children>
+            <AutoForm id="formCondition">
+              <ClientEvent name="onKeyDown">if (arg.keyCode === 13) {&#xD;
+window.clearTimeout(self.urlQueryTimeout);&#xD;
+self.urlQueryTimeout = window.setTimeout(function() {&#xD;
+var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+with (view.get(&quot;#dsPatrolTask&quot;)) {&#xD;
+set(&quot;parameter&quot;, data);&#xD;
+flushAsync();&#xD;
+}&#xD;
+}, 250);&#xD;
+}</ClientEvent>
+              <Property name="labelWidth">120</Property>
+              <Property name="cols">*,*</Property>
+              <Property name="createPrivateDataSet">true</Property>
+              <Property name="dataType">Condition</Property>
+              <Property name="labelAlign">center</Property>
+              <Property name="showHint">false</Property>
+              <AutoFormElement>
+                <Property name="name">name</Property>
+                <Property name="label">任务名称</Property>
+                <Editor/>
+              </AutoFormElement>
+              <AutoFormElement>
+                <Property name="name">activeStatus</Property>
+                <Property name="property">activeStatus</Property>
+                <Editor/>
+              </AutoFormElement>
+            </AutoForm>
+            <ToolBar>
+              <Property name="fixRight">true</Property>
+              <ToolBarButton>
+                <ClientEvent name="onClick">var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+with (view.get(&quot;#dsPatrolTask&quot;)){&#xD;
+set(&quot;parameter&quot;, data);&#xD;
+flushAsync();&#xD;
+}</ClientEvent>
+                <Property name="caption">查询</Property>
+                <Property name="iconClass">fa fa-search</Property>
+              </ToolBarButton>
+              <ToolBarButton>
+                <ClientEvent name="onClick">var datas = view.get(&quot;#dsPatrolTask.data&quot;);&#xD;
+datas.insert();&#xD;
+view.get(&quot;#dialogPatrolTask&quot;).show();&#xD;
+arg.processDefault=false;</ClientEvent>
+                <Property name="caption">新增</Property>
+                <Property name="iconClass">fa fa-plus</Property>
+              </ToolBarButton>
+              <ToolBarButton>
+                <ClientEvent name="onClick">var updateAction=view.get(&quot;#updateAction&quot;);&#xD;
+var selection = view.get(&quot;#dgPatrolTask&quot;).get(&quot;selection&quot;);&#xD;
+&#xD;
+if(0 != selection.length) {&#xD;
+dorado.MessageBox.confirm(&quot;确认操作吗?&quot;,function(){&#xD;
+&#xD;
+for (var i = 0; i &lt; selection.length; i++) {&#xD;
+var select = selection[i];&#xD;
+select.remove();&#xD;
+}&#xD;
+&#xD;
+updateAction.execute();&#xD;
+view.get(&quot;#dsPatrolTask&quot;).flushAsync(); &#xD;
+})&#xD;
+&#xD;
+} else {&#xD;
+dorado.MessageBox.alert(&quot;请选择需要操作的记录！&quot;);&#xD;
+}&#xD;
+&#xD;
+&#xD;
+</ClientEvent>
+                <Property name="iconClass">fa fa-trash-o</Property>
+                <Property name="caption">删除(批量)</Property>
+              </ToolBarButton>
+              <ToolBarButton>
+                <ClientEvent name="onClick">var selection = view.get(&quot;#dgPatrolTask&quot;).get(&quot;selection&quot;);&#xD;
+&#xD;
+if(0 != selection.length) {&#xD;
+view.get(&quot;#dialogCopy&quot;).show();&#xD;
+&#xD;
+} else {&#xD;
+dorado.MessageBox.alert(&quot;请选择需要操作的记录！&quot;);&#xD;
+}&#xD;
+&#xD;
+&#xD;
+</ClientEvent>
+                <Property name="caption">复制(批量)</Property>
+                <Property name="iconClass">fa fa-copy</Property>
+              </ToolBarButton>
+              <Fill/>
+              <DataPilot>
+                <Property name="dataSet">dsPatrolTask</Property>
+                <Property name="itemCodes">pages,pageSize</Property>
+              </DataPilot>
+            </ToolBar>
+            <DataGrid id="dgPatrolTask">
+              <ClientEvent name="onDataRowClick">view.get(&quot;#dsPatrolTaskItem&quot;).flushAsync(); </ClientEvent>
+              <Property name="dataSet">dsPatrolTask</Property>
+              <Property name="dataType">PatrolTask</Property>
+              <Property name="selectionMode">multiRows</Property>
+              <Property name="readOnly">true</Property>
+              <RowSelectorColumn/>
+              <RowNumColumn/>
+              <DataColumn name="任务名称">
+                <Property name="caption">任务名称</Property>
+                <Property name="property">name</Property>
+                <Property name="align">center</Property>
+              </DataColumn>
+              <DataColumn name="巡访开始时间">
+                <Property name="caption">巡访开始时间</Property>
+                <Property name="property">patrolStartDate</Property>
+                <Property name="align">center</Property>
+              </DataColumn>
+              <DataColumn name="巡访结束时间">
+                <Property name="caption">巡访结束时间</Property>
+                <Property name="property">patrolEndDate</Property>
+                <Property name="align">center</Property>
+              </DataColumn>
+              <DataColumn name="完成比例(%)">
+                <Property name="caption">完成比例(%)</Property>
+                <Property name="property">doneRatio</Property>
+                <Property name="align">center</Property>
+              </DataColumn>
+              <DataColumn>
+                <Property name="property">activeStatus</Property>
+                <Property name="align">center</Property>
+                <Property name="name">activeStatus</Property>
+              </DataColumn>
+            </DataGrid>
+            <Dialog id="dialogPatrolTask">
+              <ClientEvent name="onClose">var data=view.get(&quot;#dsPatrolTask&quot;).getData();&#xD;
+data.cancel();&#xD;
+&#xD;
+</ClientEvent>
+              <Property name="center">true</Property>
+              <Property name="maximizeable">true</Property>
+              <Property name="width">1024</Property>
+              <Property name="height">500</Property>
+              <Property name="modal">true</Property>
+              <Property name="closeable">true</Property>
+              <Property name="caption">巡防任务详情</Property>
+              <Buttons>
+                <Button>
+                  <ClientEvent name="onClick">var data=view.get(&quot;#dsPatrolTask&quot;).getData();
+var dialog=view.get(&quot;#dialogPatrolTask&quot;);
+data.cancel();
+dialog.hide();</ClientEvent>
+                  <Property name="caption">关闭</Property>
+                  <Property name="iconClass">fa fa-arrow-circle-o-left</Property>
+                  <Property name="ui">decline</Property>
+                </Button>
+                <Button>
+                  <ClientEvent name="onClick">var dialog=view.get(&quot;#dialogPatrolTask&quot;);&#xD;
+var action=view.get(&quot;#updateAction&quot;);&#xD;
+action.execute(function(){&#xD;
+view.get(&quot;#dsPatrolTask&quot;).flush(); &#xD;
+view.get(&quot;#dsPatrolTaskItem&quot;).flush(); &#xD;
+dialog.hide();&#xD;
+&#xD;
+})</ClientEvent>
+                  <Property name="caption">确定</Property>
+                  <Property name="iconClass">fa fa-check-circle</Property>
+                  <Property name="ui">highlight</Property>
+                </Button>
+              </Buttons>
+              <Children>
+                <AutoForm id="formMain">
+                  <Property name="labelWidth">100</Property>
+                  <Property name="dataSet">dsPatrolTask</Property>
+                  <Property name="cols">*,*</Property>
+                  <Property name="labelAlign">center</Property>
+                  <Property name="showHint">false</Property>
+                  <Property name="showHintMessage">true</Property>
+                  <AutoFormElement name="name">
+                    <Property name="name">name</Property>
+                    <Property name="property">name</Property>
+                    <Property name="label">任务名称</Property>
+                    <Editor/>
+                  </AutoFormElement>
+                  <AutoFormElement name="doneRatio">
+                    <Property name="name">doneRatio</Property>
+                    <Property name="property">doneRatio</Property>
+                    <Property name="label">完成比例(%)</Property>
+                    <Property name="trigger">dropDownSlider</Property>
+                    <Editor/>
+                  </AutoFormElement>
+                  <AutoFormElement>
+                    <Property name="name">patrolStartDate</Property>
+                    <Property name="property">patrolStartDate</Property>
+                    <Editor/>
+                  </AutoFormElement>
+                  <AutoFormElement>
+                    <Property name="name">patrolEndDate</Property>
+                    <Property name="property">patrolEndDate</Property>
+                    <Editor/>
+                  </AutoFormElement>
+                </AutoForm>
+                <CustomDropDown id="dropDownSlider">
+                  <Property name="height">22</Property>
+                  <Slider>
+                    <ClientEvent name="onValueChange">var dropdown = dorado.widget.DropDown.findDropDown(self);&#xD;
+var editor = dropdown.get(&quot;editor&quot;);&#xD;
+dropdown.close(self.get(&quot;value&quot;));</ClientEvent>
+                  </Slider>
+                </CustomDropDown>
+              </Children>
+              <Tools/>
+            </Dialog>
+            <Dialog id="dialogCopy">
+              <ClientEvent name="onClose">var data=view.get(&quot;#dsPatrolTask&quot;).getData();&#xD;
+var dialog=view.get(&quot;#dialogCopy&quot;);&#xD;
+data.cancel();&#xD;
+dialog.hide();</ClientEvent>
+              <Property name="center">true</Property>
+              <Property name="maximizeable">true</Property>
+              <Property name="width">1024</Property>
+              <Property name="height">400</Property>
+              <Property name="modal">true</Property>
+              <Property name="closeable">true</Property>
+              <Property name="caption">复制任务</Property>
+              <Buttons>
+                <Button>
+                  <ClientEvent name="onClick">var data=view.get(&quot;#dsPatrolTask&quot;).getData();
+var dialog=view.get(&quot;#dialogCopy&quot;);
+data.cancel();
+dialog.hide();</ClientEvent>
+                  <Property name="caption">关闭</Property>
+                  <Property name="iconClass">fa fa-arrow-circle-o-left</Property>
+                  <Property name="ui">decline</Property>
+                </Button>
+                <Button>
+                  <ClientEvent name="onClick">var selection = view.get(&quot;#dgPatrolTask&quot;).get(&quot;selection&quot;);&#xD;
+&#xD;
+var entity = view.get(&quot;#dgPatrolTask&quot;).getCurrentItem();&#xD;
+var patrolTaskId = entity.get(&quot;id&quot;);&#xD;
+var copy = view.get(&quot;#formCopy.entity&quot;);&#xD;
+&#xD;
+var parameter={&#xD;
+	&quot;selection&quot;:selection,&#xD;
+	&quot;id&quot;:patrolTaskId,&#xD;
+	&quot;patrolStartDate&quot;:copy.get(&quot;patrolStartDate&quot;),&#xD;
+	&quot;patrolEndDate&quot;:copy.get(&quot;patrolEndDate&quot;)&#xD;
+}&#xD;
+view.get(&quot;#aaCopy&quot;).set(&quot;parameter&quot;, parameter).execute(function(result) {&#xD;
+    view.get(&quot;#dialogCopy&quot;).hide();&#xD;
+    var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+    with(view.get(&quot;#dsPatrolTask&quot;)) {&#xD;
+        set(&quot;parameter&quot;, data);&#xD;
+        flushAsync();&#xD;
+    }&#xD;
+});</ClientEvent>
+                  <Property name="caption">确定</Property>
+                  <Property name="iconClass">fa fa-check-circle</Property>
+                  <Property name="ui">highlight</Property>
+                </Button>
+              </Buttons>
+              <Children>
+                <AutoForm id="formCopy">
+                  <Property name="labelWidth">100</Property>
+                  <Property name="cols">*,*</Property>
+                  <Property name="labelAlign">center</Property>
+                  <Property name="showHint">false</Property>
+                  <Property name="showHintMessage">true</Property>
+                  <Property name="dataType">Copy</Property>
+                  <Property name="createPrivateDataSet">true</Property>
+                  <AutoFormElement>
+                    <Property name="name">patrolStartDate</Property>
+                    <Property name="property">patrolStartDate</Property>
+                    <Editor/>
+                  </AutoFormElement>
+                  <AutoFormElement>
+                    <Property name="name">patrolEndDate</Property>
+                    <Property name="property">patrolEndDate</Property>
+                    <Editor/>
+                  </AutoFormElement>
+                </AutoForm>
+              </Children>
+              <Tools/>
+            </Dialog>
+          </Children>
+          <Tools/>
+        </Panel>
+      </SideControl>
+    </SplitPanel>
+  </View>
+</ViewConfig>

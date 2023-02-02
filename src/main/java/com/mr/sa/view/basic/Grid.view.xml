@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="Grid">
+      <Property name="creationType">com.mr.sa.entity.Grid</Property>
+      <PropertyDef name="id">
+        <Property></Property>
+      </PropertyDef>
+      <PropertyDef name="gridName">
+        <Property></Property>
+        <Property name="label">网格名称</Property>
+      </PropertyDef>
+      <PropertyDef name="streetName">
+        <Property></Property>
+        <Property name="label">街道名称</Property>
+      </PropertyDef>
+      <PropertyDef name="communityName">
+        <Property></Property>
+        <Property name="label">社区名称	</Property>
+      </PropertyDef>
+      <PropertyDef name="coordinate">
+        <Property></Property>
+        <Property name="label">坐标信息	</Property>
+      </PropertyDef>
+      <PropertyDef name="gridman">
+        <Property></Property>
+        <Property name="label">网格员</Property>
+      </PropertyDef>
+      <PropertyDef name="gridmanPhone">
+        <Property></Property>
+        <Property name="label">网格员电话</Property>
+      </PropertyDef>
+      <PropertyDef name="gridmanPic">
+        <Property></Property>
+        <Property name="label">网格员头像地址</Property>
+      </PropertyDef>
+      <PropertyDef name="policeName">
+        <Property></Property>
+        <Property name="label">社区民警</Property>
+      </PropertyDef>
+      <PropertyDef name="policePhone">
+        <Property></Property>
+        <Property name="label">社区民警电话</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolName">
+        <Property></Property>
+        <Property name="label">巡逻民警</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolPhone">
+        <Property></Property>
+        <Property name="label">巡逻民警电话</Property>
+      </PropertyDef>
+      <PropertyDef name="patrolColor">
+        <Property></Property>
+        <Property name="label">警格底色</Property>
+      </PropertyDef>
+      <PropertyDef name="gridColor">
+        <Property></Property>
+        <Property name="label">网格底色</Property>
+      </PropertyDef>
+      <PropertyDef name="policeOffice">
+        <Property></Property>
+        <Property name="label">所属派出所</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="Condition">
+      <PropertyDef name="gridName">
+        <Property></Property>
+        <Property name="label">网格名称</Property>
+      </PropertyDef>
+      <PropertyDef name="streetName">
+        <Property></Property>
+        <Property name="label">街道名称</Property>
+      </PropertyDef>
+      <PropertyDef name="communityName">
+        <Property></Property>
+        <Property name="label">社区名称	</Property>
+      </PropertyDef>
+      <PropertyDef name="gridman">
+        <Property></Property>
+        <Property name="label">网格员</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="GridCoordinate">
+      <Property name="creationType">com.mr.sa.entity.GridCoordinate</Property>
+      <PropertyDef name="id">
+        <Property></Property>
+      </PropertyDef>
+      <PropertyDef name="gridId">
+        <Property></Property>
+        <Property name="label">网格id</Property>
+      </PropertyDef>
+      <PropertyDef name="latitude">
+        <Property name="dataType">Double</Property>
+        <Property name="label">纬度坐标</Property>
+      </PropertyDef>
+      <PropertyDef name="longitude">
+        <Property name="dataType">Double</Property>
+        <Property name="label">经度坐标</Property>
+      </PropertyDef>
+    </DataType>
+  </Model>
+  <View>
+    <Property name="packages">font-awesome,colors,entypo</Property>
+    <Property name="title">积分规则信息维护</Property>
+    <DataSet id="dsGrid">
+      <Property name="dataProvider">gridController#query</Property>
+      <Property name="pageSize">20</Property>
+      <Property name="dataType">[Grid]</Property>
+      <Property name="loadMode">lazy</Property>
+    </DataSet>
+    <DataSet id="dsGridCoordinate">
+      <ClientEvent name="beforeLoadData">var entity=view.get(&quot;#dsGrid&quot;).getData(&quot;#&quot;);&#xD;
+var gridId=entity.get(&quot;id&quot;);&#xD;
+var parameter={&#xD;
+	&quot;gridId_eq&quot;:gridId&#xD;
+}&#xD;
+self.set(&quot;parameter&quot;, parameter);&#xD;
+</ClientEvent>
+      <Property name="dataProvider">gridCoordinateController#query</Property>
+      <Property name="pageSize">1000</Property>
+      <Property name="dataType">[GridCoordinate]</Property>
+      <Property name="loadMode">lazy</Property>
+    </DataSet>
+    <UpdateAction id="updateAction">
+      <Property name="successMessage">操作成功!</Property>
+      <Property name="executingMessage">正在保存...</Property>
+      <Property name="dataResolver">gridController#save</Property>
+      <UpdateItem>
+        <Property name="dataSet">dsGrid</Property>
+      </UpdateItem>
+    </UpdateAction>
+    <AutoForm id="formCondition">
+      <ClientEvent name="onKeyDown">if (arg.keyCode === 13) {&#xD;
+window.clearTimeout(self.urlQueryTimeout);&#xD;
+self.urlQueryTimeout = window.setTimeout(function() {&#xD;
+var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+with (view.get(&quot;#dsGrid&quot;)) {&#xD;
+set(&quot;parameter&quot;, data);&#xD;
+flushAsync();&#xD;
+}&#xD;
+}, 250);&#xD;
+}</ClientEvent>
+      <Property name="labelWidth">100</Property>
+      <Property name="cols">*,*,*,*</Property>
+      <Property name="createPrivateDataSet">true</Property>
+      <Property name="dataType">Condition</Property>
+      <Property name="labelAlign">center</Property>
+      <Property name="showHint">false</Property>
+      <AutoFormElement>
+        <Property name="name">gridName</Property>
+        <Property name="property">gridName</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">streetName</Property>
+        <Property name="property">streetName</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">communityName</Property>
+        <Property name="property">communityName</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">gridman</Property>
+        <Property name="property">gridman</Property>
+        <Editor/>
+      </AutoFormElement>
+    </AutoForm>
+    <ToolBar>
+      <Property name="fixRight">true</Property>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+with (view.get(&quot;#dsGrid&quot;)){&#xD;
+set(&quot;parameter&quot;, data);&#xD;
+flushAsync();&#xD;
+}</ClientEvent>
+        <Property name="caption">查询</Property>
+        <Property name="iconClass">fa fa-search</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var datas = view.get(&quot;#dsGrid.data&quot;);&#xD;
+datas.insert();&#xD;
+view.get(&quot;#dialogGrid&quot;).show();&#xD;
+arg.processDefault=false;</ClientEvent>
+        <Property name="caption">新增</Property>
+        <Property name="iconClass">fa fa-plus</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var data=view.get(&quot;#dsGrid.data&quot;);&#xD;
+if(data.current){&#xD;
+view.get(&quot;#dialogGrid&quot;).show();&#xD;
+}else{&#xD;
+dorado.MessageBox.alert(&quot;当前表没有信息可供编辑!&quot;);&#xD;
+}</ClientEvent>
+        <Property name="caption">修改</Property>
+        <Property name="iconClass">fa fa-pencil-square-o</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var updateAction=view.get(&quot;#updateAction&quot;);&#xD;
+var selection = view.get(&quot;#dgGrid&quot;).get(&quot;selection&quot;);&#xD;
+&#xD;
+if(0 != selection.length) {&#xD;
+dorado.MessageBox.confirm(&quot;确认操作吗?&quot;,function(){&#xD;
+&#xD;
+for (var i = 0; i &lt; selection.length; i++) {&#xD;
+var select = selection[i];&#xD;
+select.remove();&#xD;
+}&#xD;
+&#xD;
+updateAction.execute();&#xD;
+view.get(&quot;#dsGrid&quot;).flushAsync(); &#xD;
+})&#xD;
+&#xD;
+} else {&#xD;
+dorado.MessageBox.alert(&quot;请选择需要操作的记录！&quot;);&#xD;
+}&#xD;
+&#xD;
+&#xD;
+</ClientEvent>
+        <Property name="iconClass">fa fa-trash-o</Property>
+        <Property name="caption">删除(批量)</Property>
+      </ToolBarButton>
+      <Fill/>
+      <DataPilot>
+        <Property name="dataSet">dsGrid</Property>
+        <Property name="itemCodes">pages,pageSize</Property>
+      </DataPilot>
+    </ToolBar>
+    <DataGrid id="dgGrid">
+      <ClientEvent name="onCreate">var OperationCellRendererDetail = $extend(dorado.widget.grid.SubControlCellRenderer, {&#xD;
+    createSubControl: function(arg) {&#xD;
+        var entity = arg.data;&#xD;
+        var container = new dorado.widget.Container({&#xD;
+            layout: new dorado.widget.layout.HBoxLayout()&#xD;
+        });&#xD;
+        container.set(&quot;children&quot;, [new dorado.widget.Button({&#xD;
+            iconClass: &quot;icon-network&quot;,&#xD;
+			tip:&quot;查看&quot;,&#xD;
+            onClick: function(self) {&#xD;
+				var data=view.get(&quot;#dsEvent.data&quot;); &#xD;
+				view.get(&quot;#dsGridCoordinate&quot;).flushAsync();&#xD;
+				view.get(&quot;#dialogGridCoordinate&quot;).show(); &#xD;
+            }&#xD;
+        })]);&#xD;
+        return container;&#xD;
+    },&#xD;
+&#xD;
+    refreshSubControl: function(container, arg) {&#xD;
+        var children = container.get(&quot;children&quot;);&#xD;
+    }&#xD;
+});&#xD;
+&#xD;
+self.set(&quot;#coordinate.renderer&quot;, new OperationCellRendererDetail());&#xD;
+&#xD;
+ </ClientEvent>
+      <Property name="dataSet">dsGrid</Property>
+      <Property name="selectionMode">multiRows</Property>
+      <Property name="readOnly">true</Property>
+      <RowSelectorColumn/>
+      <RowNumColumn/>
+      <DataColumn name="gridName">
+        <Property name="property">gridName</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="streetName">
+        <Property name="property">streetName</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="communityName">
+        <Property name="property">communityName</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="coordinate">
+        <Property name="align">center</Property>
+        <Property name="width">55</Property>
+      </DataColumn>
+      <DataColumn name="gridman">
+        <Property name="property">gridman</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="gridmanPhone">
+        <Property name="property">gridmanPhone</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="gridmanPic">
+        <ClientEvent name="onRenderCell">$(arg.dom).empty().xCreate(&#xD;
+			{&#xD;
+				tagName : &quot;IMG&quot;,&#xD;
+				src : arg.data.get(&quot;gridmanPic&quot;),&#xD;
+				//style : &quot;margin: 2px&quot;&#xD;
+				style : &quot;width: 30px; height: 30px; margin: 1px&quot;&#xD;
+			});&#xD;
+&#xD;
+	dorado.TipManager.initTip(arg.dom.parentNode, {&#xD;
+		content : {&#xD;
+			tagName : &quot;IMG&quot;,&#xD;
+			src : arg.data.get(&quot;gridmanPic&quot;),&#xD;
+			style : &quot;width: 120px; height: 120px; margin: 2px&quot;&#xD;
+		},&#xD;
+		arrowDirection : &quot;top&quot;,&#xD;
+		arrowAlign : &quot;left&quot;&#xD;
+	});</ClientEvent>
+        <Property name="property">gridmanPic</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="policeName">
+        <Property name="property">policeName</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="policePhone">
+        <Property name="property">policePhone</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="patrolName">
+        <Property name="property">patrolName</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="patrolPhone">
+        <Property name="property">patrolPhone</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="policeOffice">
+        <Property name="property">policeOffice</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="patrolColor">
+        <Property name="property">patrolColor</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="gridColor">
+        <Property name="property">gridColor</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+    </DataGrid>
+    <Dialog id="dialogGrid">
+      <ClientEvent name="onClose">var data=view.get(&quot;#dsGrid&quot;).getData();&#xD;
+data.cancel();&#xD;
+</ClientEvent>
+      <Property name="center">true</Property>
+      <Property name="maximizeable">true</Property>
+      <Property name="width">1024</Property>
+      <Property name="height">500</Property>
+      <Property name="modal">true</Property>
+      <Property name="closeable">true</Property>
+      <Property name="caption">详情</Property>
+      <Buttons>
+        <Button>
+          <ClientEvent name="onClick">var data=view.get(&quot;#dsGrid&quot;).getData();
+var dialog=view.get(&quot;#dialogGrid&quot;);
+data.cancel();
+dialog.hide();</ClientEvent>
+          <Property name="caption">关闭</Property>
+          <Property name="iconClass">fa fa-arrow-circle-o-left</Property>
+          <Property name="ui">decline</Property>
+        </Button>
+        <Button>
+          <ClientEvent name="onClick">var dialog=view.get(&quot;#dialogGrid&quot;);&#xD;
+var action=view.get(&quot;#updateAction&quot;);&#xD;
+action.execute(function(){&#xD;
+dialog.hide();&#xD;
+view.get(&quot;#dsGrid&quot;).flushAsync(); &#xD;
+})</ClientEvent>
+          <Property name="caption">确定</Property>
+          <Property name="iconClass">fa fa-check-circle</Property>
+          <Property name="ui">highlight</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <AutoForm>
+          <Property name="labelWidth">100</Property>
+          <Property name="dataSet">dsGrid</Property>
+          <Property name="cols">*,*</Property>
+          <Property name="labelAlign">center</Property>
+          <Property name="showHint">false</Property>
+          <Property name="showHintMessage">true</Property>
+          <AutoFormElement>
+            <Property name="name">gridName</Property>
+            <Property name="property">gridName</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">streetName</Property>
+            <Property name="property">streetName</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">communityName</Property>
+            <Property name="property">communityName</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">gridman</Property>
+            <Property name="property">gridman</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">gridmanPhone</Property>
+            <Property name="property">gridmanPhone</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">gridmanPic</Property>
+            <Property name="property">gridmanPic</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">policeName</Property>
+            <Property name="property">policeName</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">policePhone</Property>
+            <Property name="property">policePhone</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">patrolName</Property>
+            <Property name="property">patrolName</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">patrolPhone</Property>
+            <Property name="property">patrolPhone</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">patrolColor</Property>
+            <Property name="property">patrolColor</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">gridColor</Property>
+            <Property name="property">gridColor</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">policeOffice</Property>
+            <Property name="property">policeOffice</Property>
+            <Editor/>
+          </AutoFormElement>
+        </AutoForm>
+      </Children>
+      <Tools/>
+    </Dialog>
+    <Dialog id="dialogGridCoordinate">
+      <Property name="center">true</Property>
+      <Property name="maximizeable">true</Property>
+      <Property name="width">1024</Property>
+      <Property name="height">500</Property>
+      <Property name="modal">true</Property>
+      <Property name="closeable">true</Property>
+      <Property name="caption">详情-经纬度</Property>
+      <Buttons>
+        <Button>
+          <ClientEvent name="onClick">var data=view.get(&quot;#dsGrid&quot;).getData();
+var dialog=view.get(&quot;#dialogGridCoordinate&quot;);
+data.cancel();
+dialog.hide();</ClientEvent>
+          <Property name="caption">关闭</Property>
+          <Property name="iconClass">fa fa-arrow-circle-o-left</Property>
+          <Property name="ui">decline</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <DataGrid id="dgGridCoordinate">
+          <Property name="dataSet">dsGridCoordinate</Property>
+          <Property name="readOnly">true</Property>
+          <Property name="highlightCurrentRow">false</Property>
+          <RowNumColumn/>
+          <DataColumn name="latitude">
+            <Property name="property">latitude</Property>
+            <Property name="align">center</Property>
+          </DataColumn>
+          <DataColumn name="longitude">
+            <Property name="property">longitude</Property>
+            <Property name="align">center</Property>
+          </DataColumn>
+        </DataGrid>
+      </Children>
+      <Tools/>
+    </Dialog>
+  </View>
+</ViewConfig>

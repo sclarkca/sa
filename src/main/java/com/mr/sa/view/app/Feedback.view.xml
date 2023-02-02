@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="Feedback">
+      <Property name="creationType">com.mr.sa.entity.Feedback</Property>
+      <PropertyDef name="id">
+        <Property name="dataType">String</Property>
+      </PropertyDef>
+      <PropertyDef name="userId">
+        <Property name="dataType">String</Property>
+        <Property name="label">用户ID</Property>
+      </PropertyDef>
+      <PropertyDef name="userName">
+        <Property name="dataType">String</Property>
+        <Property name="label">用户名称</Property>
+      </PropertyDef>
+      <PropertyDef name="mobile">
+        <Property name="dataType">String</Property>
+        <Property name="label">手机号</Property>
+      </PropertyDef>
+      <PropertyDef name="type">
+        <Property name="dataType">String</Property>
+        <Property name="label">反馈类型</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;enumProvider#getValues&quot;).getResult(&quot;FEEDBACK_TYPE&quot;)}</Property>
+        </Property>
+      </PropertyDef>
+      <PropertyDef name="content">
+        <Property name="dataType">String</Property>
+        <Property name="label">反馈内容</Property>
+      </PropertyDef>
+      <PropertyDef name="status">
+        <Property name="dataType">String</Property>
+        <Property name="label">状态</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;enumProvider#getValues&quot;).getResult(&quot;FEEDBACK_STATUS&quot;)}</Property>
+        </Property>
+      </PropertyDef>
+      <PropertyDef name="createdDate">
+        <Property></Property>
+        <Property name="label">反馈时间</Property>
+        <Property name="dataType">DateTime</Property>
+      </PropertyDef>
+      <PropertyDef name="creator">
+        <Property></Property>
+        <Property name="label">创建人</Property>
+      </PropertyDef>
+      <PropertyDef name="updateDate">
+        <Property></Property>
+        <Property name="label">修改日期</Property>
+        <Property name="dataType">DateTime</Property>
+      </PropertyDef>
+      <PropertyDef name="modifier">
+        <Property></Property>
+        <Property name="label">修改人</Property>
+      </PropertyDef>
+      <PropertyDef name="importDetail">
+        <Property></Property>
+        <Property name="label">导入详情</Property>
+      </PropertyDef>
+      <PropertyDef name="contact">
+        <Property></Property>
+        <Property name="label">联系方式</Property>
+      </PropertyDef>
+      <PropertyDef name="images">
+        <Property></Property>
+        <Property name="label">图片</Property>
+      </PropertyDef>
+      <PropertyDef name="user">
+        <Property name="dataType">User</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="Condition">
+      <PropertyDef name="userName">
+        <Property name="dataType">String</Property>
+        <Property name="label">用户名称</Property>
+      </PropertyDef>
+      <PropertyDef name="mobile">
+        <Property name="dataType">String</Property>
+        <Property name="label">手机号</Property>
+      </PropertyDef>
+      <PropertyDef name="type">
+        <Property name="dataType">String</Property>
+        <Property name="label">反馈类型</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;enumProvider#getValues&quot;).getResult(&quot;FEEDBACK_TYPE&quot;)}</Property>
+        </Property>
+      </PropertyDef>
+      <PropertyDef name="status">
+        <Property name="dataType">String</Property>
+        <Property name="label">状态</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;enumProvider#getValues&quot;).getResult(&quot;FEEDBACK_STATUS&quot;)}</Property>
+        </Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="AttachmentFile">
+      <Property name="creationType">com.mr.sa.dto.AttachmentFile</Property>
+      <PropertyDef name="id">
+        <Property></Property>
+      </PropertyDef>
+      <PropertyDef name="name">
+        <Property></Property>
+      </PropertyDef>
+      <PropertyDef name="percent">
+        <Property></Property>
+      </PropertyDef>
+      <PropertyDef name="size">
+        <Property></Property>
+      </PropertyDef>
+      <PropertyDef name="status">
+        <Property></Property>
+      </PropertyDef>
+      <PropertyDef name="uploadUrl">
+        <Property></Property>
+      </PropertyDef>
+      <PropertyDef name="detail"/>
+    </DataType>
+    <DataType name="User">
+      <Property name="creationType">com.mr.sa.entity.app.AppUser</Property>
+      <PropertyDef name="username">
+        <Property></Property>
+        <Property name="label">用户名</Property>
+        <Property name="required">true</Property>
+        <Validator type="ajax">
+          <Property name="service">userController#isExists</Property>
+          <Property name="async">false</Property>
+        </Validator>
+      </PropertyDef>
+      <PropertyDef name="nickname">
+        <Property></Property>
+        <Property name="label">昵称</Property>
+        <Property name="required">true</Property>
+      </PropertyDef>
+      <PropertyDef name="password">
+        <Property></Property>
+        <Property name="label">密码</Property>
+        <Property name="required">true</Property>
+        <Validator type="charLength">
+          <Property name="minLength">6</Property>
+          <Property name="name">validator</Property>
+        </Validator>
+      </PropertyDef>
+      <PropertyDef name="enabled">
+        <Property name="dataType">boolean</Property>
+        <Property name="label">可用</Property>
+        <Property name="defaultValue">true</Property>
+      </PropertyDef>
+      <PropertyDef name="orgId">
+        <Property></Property>
+        <Property name="label">组织</Property>
+      </PropertyDef>
+      <PropertyDef name="gender">
+        <Property></Property>
+        <Property name="label">性别</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;enumProvider#getValues&quot;).getResult(&quot;GENDER&quot;)}</Property>
+        </Property>
+      </PropertyDef>
+      <PropertyDef name="phone">
+        <Property></Property>
+        <Property name="label">电话</Property>
+      </PropertyDef>
+      <PropertyDef name="mail">
+        <Property></Property>
+        <Property name="label">邮箱</Property>
+      </PropertyDef>
+      <PropertyDef name="address">
+        <Property></Property>
+        <Property name="label">住址</Property>
+      </PropertyDef>
+      <PropertyDef name="remark">
+        <Property></Property>
+        <Property name="label">备注</Property>
+      </PropertyDef>
+      <PropertyDef name="roleId">
+        <Property></Property>
+        <Property name="label">角色</Property>
+        <Property name="mapping">
+          <Property name="mapValues">${dorado.getDataProvider(&quot;appRoleController#getValuesName&quot;).getResult()}</Property>
+        </Property>
+      </PropertyDef>
+      <PropertyDef name="id">
+        <Property></Property>
+        <Property name="label">id</Property>
+      </PropertyDef>
+      <PropertyDef name="createdDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">创建日期</Property>
+      </PropertyDef>
+      <PropertyDef name="creator">
+        <Property></Property>
+        <Property name="label">创建人</Property>
+      </PropertyDef>
+      <PropertyDef name="updateDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">修改日期</Property>
+      </PropertyDef>
+      <PropertyDef name="modifier">
+        <Property></Property>
+        <Property name="label">修改人</Property>
+      </PropertyDef>
+      <PropertyDef name="avatar">
+        <Property></Property>
+        <Property name="label">头像</Property>
+      </PropertyDef>
+      <PropertyDef name="checked">
+        <Property name="dataType">boolean</Property>
+        <Property name="label">是否选中</Property>
+      </PropertyDef>
+    </DataType>
+  </Model>
+  <View>
+    <Property name="packages">font-awesome,colors,entypo</Property>
+    <Property name="title">意见反馈信息维护</Property>
+    <DataSet id="dsFeedback">
+      <Property name="dataProvider">feedbackController#query</Property>
+      <Property name="pageSize">20</Property>
+      <Property name="dataType">[Feedback]</Property>
+      <Property name="loadMode">lazy</Property>
+    </DataSet>
+    <DataSet id="dsImages">
+      <ClientEvent name="beforeLoadData">var entity=view.get(&quot;#dsFeedback&quot;).getData(&quot;#&quot;);&#xD;
+var feedbackId=entity.get(&quot;id&quot;);&#xD;
+var parameter={&#xD;
+	&quot;feedbackId&quot;:feedbackId&#xD;
+}&#xD;
+self.set(&quot;parameter&quot;, parameter);&#xD;
+</ClientEvent>
+      <Property name="dataType">[AttachmentFile]</Property>
+      <Property name="dataProvider">feedbackController#getImages</Property>
+      <Property name="loadMode">manual</Property>
+    </DataSet>
+    <UpdateAction id="updateAction">
+      <Property name="successMessage">操作成功!</Property>
+      <Property name="executingMessage">正在保存...</Property>
+      <Property name="dataResolver">feedbackController#save</Property>
+      <UpdateItem>
+        <Property name="dataSet">dsFeedback</Property>
+      </UpdateItem>
+    </UpdateAction>
+    <AutoForm id="formCondition">
+      <ClientEvent name="onKeyDown">if (arg.keyCode === 13) {&#xD;
+window.clearTimeout(self.urlQueryTimeout);&#xD;
+self.urlQueryTimeout = window.setTimeout(function() {&#xD;
+var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+with (view.get(&quot;#dsFeedback&quot;)) {&#xD;
+set(&quot;parameter&quot;, data);&#xD;
+flushAsync();&#xD;
+}&#xD;
+}, 250);&#xD;
+}</ClientEvent>
+      <Property name="labelWidth">100</Property>
+      <Property name="cols">*,*,*,*</Property>
+      <Property name="createPrivateDataSet">true</Property>
+      <Property name="dataType">Condition</Property>
+      <Property name="labelAlign">center</Property>
+      <Property name="showHint">false</Property>
+      <AutoFormElement>
+        <Property name="name">userName</Property>
+        <Property name="label">用户名称</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">mobile</Property>
+        <Property name="label">手机号</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">type</Property>
+        <Property name="label">反馈类型</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">status</Property>
+        <Property name="label">状态</Property>
+        <Editor/>
+      </AutoFormElement>
+    </AutoForm>
+    <ToolBar>
+      <Property name="fixRight">true</Property>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+with (view.get(&quot;#dsFeedback&quot;)){&#xD;
+set(&quot;parameter&quot;, data);&#xD;
+flushAsync();&#xD;
+}</ClientEvent>
+        <Property name="caption">查询</Property>
+        <Property name="iconClass">fa fa-search</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var datas = view.get(&quot;#dsFeedback.data&quot;);&#xD;
+datas.insert();&#xD;
+view.get(&quot;#dialogFeedback&quot;).show();&#xD;
+arg.processDefault=false;</ClientEvent>
+        <Property name="caption">新增</Property>
+        <Property name="iconClass">fa fa-plus</Property>
+        <Property name="visible">false</Property>
+        <Property name="hideMode">display</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var data=view.get(&quot;#dsFeedback.data&quot;);&#xD;
+if(data.current){&#xD;
+view.get(&quot;#dialogFeedback&quot;).show();&#xD;
+}else{&#xD;
+dorado.MessageBox.alert(&quot;当前表没有信息可供编辑!&quot;);&#xD;
+}</ClientEvent>
+        <Property name="caption">修改</Property>
+        <Property name="iconClass">fa fa-pencil-square-o</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var data=view.get(&quot;#dsFeedback.data&quot;);&#xD;
+if(data.current){&#xD;
+view.get(&quot;#dsImages&quot;).flushAsync();&#xD;
+view.get(&quot;#dialogFeedbackDetail&quot;).show();&#xD;
+}else{&#xD;
+dorado.MessageBox.alert(&quot;当前表没有信息可供编辑!&quot;);&#xD;
+}</ClientEvent>
+        <Property name="caption">详情</Property>
+        <Property name="iconClass">fa fa-eye</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var updateAction=view.get(&quot;#updateAction&quot;);&#xD;
+var selection = view.get(&quot;#dgFeedback&quot;).get(&quot;selection&quot;);&#xD;
+&#xD;
+if(0 != selection.length) {&#xD;
+dorado.MessageBox.confirm(&quot;确认操作吗?&quot;,function(){&#xD;
+&#xD;
+for (var i = 0; i &lt; selection.length; i++) {&#xD;
+var select = selection[i];&#xD;
+select.remove();&#xD;
+}&#xD;
+&#xD;
+updateAction.execute();&#xD;
+view.get(&quot;#dsFeedback&quot;).flushAsync(); &#xD;
+})&#xD;
+&#xD;
+} else {&#xD;
+dorado.MessageBox.alert(&quot;请选择需要操作的记录！&quot;);&#xD;
+}&#xD;
+&#xD;
+&#xD;
+</ClientEvent>
+        <Property name="iconClass">fa fa-trash-o</Property>
+        <Property name="caption">删除(批量)</Property>
+      </ToolBarButton>
+      <Fill/>
+      <DataPilot>
+        <Property name="dataSet">dsFeedback</Property>
+        <Property name="itemCodes">pages,pageSize</Property>
+      </DataPilot>
+    </ToolBar>
+    <DataGrid id="dgFeedback">
+      <Property name="dataSet">dsFeedback</Property>
+      <Property name="dataType">Feedback</Property>
+      <Property name="selectionMode">multiRows</Property>
+      <Property name="readOnly">true</Property>
+      <RowSelectorColumn/>
+      <RowNumColumn/>
+      <DataColumn name="用户ID">
+        <Property name="caption">用户ID</Property>
+        <Property name="property">userId</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="用户名称">
+        <Property name="caption">用户名称</Property>
+        <Property name="property">userName</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn>
+        <ClientEvent name="onRenderCell">$(arg.dom).empty().xCreate(&#xD;
+			{&#xD;
+				tagName : &quot;IMG&quot;,&#xD;
+				src : arg.data.get(&quot;user.avatar&quot;),&#xD;
+				//style : &quot;margin: 2px&quot;&#xD;
+				style : &quot;width: 30px; height: 30px; margin: 1px&quot;&#xD;
+			});&#xD;
+&#xD;
+	dorado.TipManager.initTip(arg.dom.parentNode, {&#xD;
+		content : {&#xD;
+			tagName : &quot;IMG&quot;,&#xD;
+			src : arg.data.get(&quot;user.avatar&quot;),&#xD;
+			style : &quot;width: 120px; height: 120px; margin: 2px&quot;&#xD;
+		},&#xD;
+		arrowDirection : &quot;top&quot;,&#xD;
+		arrowAlign : &quot;left&quot;&#xD;
+	});</ClientEvent>
+        <Property name="property">user.avatar</Property>
+        <Property name="align">center</Property>
+        <Property name="caption">头像</Property>
+        <Property name="width">80</Property>
+        <Property name="name">avatar</Property>
+      </DataColumn>
+      <DataColumn name="手机号">
+        <Property name="caption">手机号</Property>
+        <Property name="property">mobile</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="contact">
+        <Property name="property">contact</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="反馈类型">
+        <Property name="caption">反馈类型</Property>
+        <Property name="property">type</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="状态">
+        <Property name="caption">状态</Property>
+        <Property name="property">status</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="反馈内容">
+        <Property name="caption">反馈内容</Property>
+        <Property name="property">content</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="createdDate">
+        <Property name="property">createdDate</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+    </DataGrid>
+    <Dialog id="dialogFeedback">
+      <ClientEvent name="onClose">var data=view.get(&quot;#dsFeedback&quot;).getData();&#xD;
+data.cancel();&#xD;
+</ClientEvent>
+      <Property name="center">true</Property>
+      <Property name="maximizeable">true</Property>
+      <Property name="width">1024</Property>
+      <Property name="height">500</Property>
+      <Property name="modal">true</Property>
+      <Property name="closeable">true</Property>
+      <Property name="caption">编辑</Property>
+      <Buttons>
+        <Button>
+          <ClientEvent name="onClick">var data=view.get(&quot;#dsFeedback&quot;).getData();
+var dialog=view.get(&quot;#dialogFeedback&quot;);
+data.cancel();
+dialog.hide();</ClientEvent>
+          <Property name="caption">关闭</Property>
+          <Property name="iconClass">fa fa-arrow-circle-o-left</Property>
+          <Property name="ui">decline</Property>
+        </Button>
+        <Button>
+          <ClientEvent name="onClick">var dialog=view.get(&quot;#dialogFeedback&quot;);&#xD;
+var action=view.get(&quot;#updateAction&quot;);&#xD;
+action.execute(function(){&#xD;
+dialog.hide();&#xD;
+view.get(&quot;#dsFeedback&quot;).flushAsync(); &#xD;
+})</ClientEvent>
+          <Property name="caption">确定</Property>
+          <Property name="iconClass">fa fa-check-circle</Property>
+          <Property name="ui">highlight</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <AutoForm>
+          <Property name="labelWidth">120</Property>
+          <Property name="dataSet">dsFeedback</Property>
+          <Property name="cols">*,*</Property>
+          <Property name="labelAlign">center</Property>
+          <Property name="showHint">false</Property>
+          <Property name="showHintMessage">true</Property>
+          <AutoFormElement name="userId">
+            <Property name="name">userId</Property>
+            <Property name="property">userId</Property>
+            <Property name="label">用户ID</Property>
+            <Property name="readOnly">true</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement name="userName">
+            <Property name="name">userName</Property>
+            <Property name="property">userName</Property>
+            <Property name="label">用户名称</Property>
+            <Property name="readOnly">true</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement name="mobile">
+            <Property name="name">mobile</Property>
+            <Property name="property">mobile</Property>
+            <Property name="label">手机号</Property>
+            <Property name="readOnly">true</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">contact</Property>
+            <Property name="property">contact</Property>
+            <Property name="readOnly">true</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement name="type">
+            <Property name="name">type</Property>
+            <Property name="property">type</Property>
+            <Property name="label">反馈类型</Property>
+            <Property name="readOnly">true</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement name="status">
+            <Property name="name">status</Property>
+            <Property name="property">status</Property>
+            <Property name="label">状态</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement layoutConstraint="colSpan:2" name="content">
+            <Property name="name">content</Property>
+            <Property name="property">content</Property>
+            <Property name="label">反馈内容</Property>
+            <Property name="editorType">TextArea</Property>
+            <Property name="readOnly">true</Property>
+            <Editor/>
+          </AutoFormElement>
+        </AutoForm>
+      </Children>
+      <Tools/>
+    </Dialog>
+    <Dialog id="dialogFeedbackDetail">
+      <ClientEvent name="onClose">var data=view.get(&quot;#dsFeedback&quot;).getData();&#xD;
+data.cancel();&#xD;
+view.get(&quot;#previewImage&quot;).set(&quot;image&quot;,null);&#xD;
+</ClientEvent>
+      <ClientEvent name="onHide">view.get(&quot;#previewImage&quot;).set(&quot;image&quot;,null);</ClientEvent>
+      <Property name="center">true</Property>
+      <Property name="maximizeable">true</Property>
+      <Property name="width">1024</Property>
+      <Property name="height">500</Property>
+      <Property name="modal">true</Property>
+      <Property name="closeable">true</Property>
+      <Property name="caption">详情</Property>
+      <Buttons>
+        <Button>
+          <ClientEvent name="onClick">var data=view.get(&quot;#dsFeedback&quot;).getData();
+var dialog=view.get(&quot;#dialogFeedbackDetail&quot;);
+data.cancel();
+dialog.hide();</ClientEvent>
+          <Property name="caption">关闭</Property>
+          <Property name="iconClass">fa fa-arrow-circle-o-left</Property>
+          <Property name="ui">decline</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <TabControl>
+          <ControlTab>
+            <Property name="caption">基本信息</Property>
+            <Property name="iconClass">icon-newspaper</Property>
+            <Panel>
+              <Buttons/>
+              <Children>
+                <AutoForm>
+                  <Property name="labelWidth">120</Property>
+                  <Property name="dataSet">dsFeedback</Property>
+                  <Property name="cols">*,*</Property>
+                  <Property name="labelAlign">center</Property>
+                  <Property name="showHint">false</Property>
+                  <Property name="showHintMessage">true</Property>
+                  <Property name="readOnly">true</Property>
+                  <AutoFormElement name="userId">
+                    <Property name="name">userId</Property>
+                    <Property name="property">userId</Property>
+                    <Property name="label">用户ID</Property>
+                    <Editor/>
+                  </AutoFormElement>
+                  <AutoFormElement name="userName">
+                    <Property name="name">userName</Property>
+                    <Property name="property">userName</Property>
+                    <Property name="label">用户名称</Property>
+                    <Editor/>
+                  </AutoFormElement>
+                  <AutoFormElement name="mobile">
+                    <Property name="name">mobile</Property>
+                    <Property name="property">mobile</Property>
+                    <Property name="label">手机号</Property>
+                    <Editor/>
+                  </AutoFormElement>
+                  <AutoFormElement>
+                    <Property name="name">contact</Property>
+                    <Property name="property">contact</Property>
+                    <Editor/>
+                  </AutoFormElement>
+                  <AutoFormElement name="type">
+                    <Property name="name">type</Property>
+                    <Property name="property">type</Property>
+                    <Property name="label">反馈类型</Property>
+                    <Editor/>
+                  </AutoFormElement>
+                  <AutoFormElement name="status">
+                    <Property name="name">status</Property>
+                    <Property name="property">status</Property>
+                    <Property name="label">状态</Property>
+                    <Editor/>
+                  </AutoFormElement>
+                  <AutoFormElement layoutConstraint="colSpan:2" name="content">
+                    <Property name="name">content</Property>
+                    <Property name="property">content</Property>
+                    <Property name="label">反馈内容</Property>
+                    <Property name="editorType">TextArea</Property>
+                    <Editor/>
+                  </AutoFormElement>
+                </AutoForm>
+              </Children>
+              <Tools/>
+            </Panel>
+          </ControlTab>
+          <ControlTab>
+            <Property name="caption">图片材料</Property>
+            <Property name="iconClass">icon-pictures</Property>
+            <SplitPanel>
+              <Property name="position">30%</Property>
+              <MainControl>
+                <Panel>
+                  <Property name="caption">预览</Property>
+                  <Property name="maximizeable">true</Property>
+                  <Buttons/>
+                  <Children>
+                    <Panel>
+                      <Property name="maximizeable">true</Property>
+                      <Buttons/>
+                      <Children>
+                        <Image id="previewImage">
+                          <Property name="width">100%</Property>
+                        </Image>
+                      </Children>
+                      <Tools/>
+                    </Panel>
+                  </Children>
+                  <Tools/>
+                </Panel>
+              </MainControl>
+              <SideControl>
+                <Panel>
+                  <Buttons/>
+                  <Children>
+                    <DataGrid>
+                      <ClientEvent name="onCreate">var OperationCellRendererDetail = $extend(dorado.widget.grid.SubControlCellRenderer, {&#xD;
+    createSubControl: function(arg) {&#xD;
+        var entity = arg.data;&#xD;
+		var uploadUrl=entity.get(&quot;uploadUrl&quot;);&#xD;
+        var container = new dorado.widget.Container({&#xD;
+            layout: new dorado.widget.layout.HBoxLayout()&#xD;
+        });&#xD;
+        container.set(&quot;children&quot;, [new dorado.widget.Button({&#xD;
+           ui: &quot;highlight&quot;,&#xD;
+           	caption :&quot;预览&quot;,&#xD;
+			iconClass: &quot;icon-pictures&quot;,&#xD;
+            onClick : function(self) {&#xD;
+				if(uploadUrl){ &#xD;
+					view.get(&quot;#previewImage&quot;).set(&quot;image&quot;,uploadUrl);&#xD;
+				}&#xD;
+            }&#xD;
+        })]);&#xD;
+        return container;&#xD;
+    },&#xD;
+&#xD;
+    refreshSubControl: function(container, arg) {&#xD;
+        var children = container.get(&quot;children&quot;);&#xD;
+    }&#xD;
+});&#xD;
+&#xD;
+self.set(&quot;#detail.renderer&quot;, new OperationCellRendererDetail());&#xD;
+&#xD;
+ &#xD;
+</ClientEvent>
+                      <Property name="dataSet">dsImages</Property>
+                      <Property name="highlightCurrentRow">false</Property>
+                      <Property name="highlightHoverRow">true</Property>
+                      <Property name="highlightSelectedRow">false</Property>
+                      <IndicatorColumn/>
+                      <RowNumColumn/>
+                      <DataColumn>
+                        <Property name="property">uploadUrl</Property>
+                        <Property name="align">center</Property>
+                        <Property name="caption">地址</Property>
+                        <Property name="name">uploadUrl</Property>
+                      </DataColumn>
+                      <DataColumn>
+                        <Property name="caption">操作</Property>
+                        <Property name="align">center</Property>
+                        <Property name="width">70</Property>
+                        <Property name="name">detail</Property>
+                        <Property name="readOnly">true</Property>
+                        <Editor/>
+                      </DataColumn>
+                    </DataGrid>
+                  </Children>
+                  <Tools/>
+                </Panel>
+              </SideControl>
+            </SplitPanel>
+          </ControlTab>
+        </TabControl>
+      </Children>
+      <Tools/>
+    </Dialog>
+  </View>
+</ViewConfig>

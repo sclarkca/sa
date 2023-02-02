@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="Condition">
+      <PropertyDef name="orgId">
+        <Property></Property>
+        <Property name="label">单位</Property>
+      </PropertyDef>
+      <PropertyDef name="recordDate_startTime">
+        <Property name="dataType">DateTime</Property>
+        <Property name="label">记录时间(起)</Property>
+      </PropertyDef>
+      <PropertyDef name="recordDate_endTime">
+        <Property name="dataType">DateTime</Property>
+        <Property name="label">记录时间(至)</Property>
+      </PropertyDef>
+      <PropertyDef name="orgName">
+        <Property name="label">单位</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="OrgOnlineTime">
+      <Property name="creationType">com.mr.sa.entity.OrgOnlineTime</Property>
+      <PropertyDef name="orgId">
+        <Property></Property>
+        <Property name="label">单位ID</Property>
+      </PropertyDef>
+      <PropertyDef name="orgName">
+        <Property></Property>
+        <Property name="label">单位名称</Property>
+      </PropertyDef>
+      <PropertyDef name="onlineSecond">
+        <Property name="dataType">Long</Property>
+        <Property name="label">在线时长</Property>
+      </PropertyDef>
+      <PropertyDef name="time">
+        <Property></Property>
+        <Property name="label">在线时长</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="Org">
+      <Property name="creationType">com.mr.sa.entity.Org</Property>
+      <PropertyDef name="id">
+        <Property></Property>
+        <Property name="label">ID</Property>
+      </PropertyDef>
+      <PropertyDef name="code">
+        <Property></Property>
+        <Property name="label">编码</Property>
+        <Property name="required">true</Property>
+      </PropertyDef>
+      <PropertyDef name="name">
+        <Property></Property>
+        <Property name="label">名称</Property>
+        <Property name="required">true</Property>
+      </PropertyDef>
+      <PropertyDef name="parentId">
+        <Property></Property>
+      </PropertyDef>
+      <PropertyDef name="longitude">
+        <Property></Property>
+        <Property name="label">经度</Property>
+      </PropertyDef>
+      <PropertyDef name="latitude">
+        <Property></Property>
+        <Property name="label">纬度</Property>
+      </PropertyDef>
+      <PropertyDef name="address">
+        <Property></Property>
+        <Property name="label">地址</Property>
+      </PropertyDef>
+      <Reference name="children">
+        <Property name="dataType">[SELF]</Property>
+        <Property name="parameter">$${this.id}</Property>
+        <Property name="dataProvider">orgController#loadChildren</Property>
+      </Reference>
+    </DataType>
+  </Model>
+  <View>
+    <Property name="packages">font-awesome</Property>
+    <Property name="title">事件处理记录信息维护</Property>
+    <DataSet id="dsOrgOnlineTime">
+      <ClientEvent name="onReady">var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+with (view.get(&quot;#dsOrgOnlineTime&quot;)){&#xD;
+set(&quot;parameter&quot;, data);&#xD;
+flushAsync();&#xD;
+}</ClientEvent>
+      <Property name="dataProvider">userKeepOnlineTimeController#queryOrg</Property>
+      <Property name="pageSize">20</Property>
+      <Property name="dataType">[OrgOnlineTime]</Property>
+      <Property>lazy</Property>
+    </DataSet>
+    <AutoForm id="formCondition">
+      <ClientEvent name="onKeyDown">if (arg.keyCode === 13) {&#xD;
+window.clearTimeout(self.urlQueryTimeout);&#xD;
+self.urlQueryTimeout = window.setTimeout(function() {&#xD;
+var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+with (view.get(&quot;#dsOrgOnlineTime&quot;)) {&#xD;
+set(&quot;parameter&quot;, data);&#xD;
+flushAsync();&#xD;
+}&#xD;
+}, 250);&#xD;
+}</ClientEvent>
+      <Property name="labelWidth">100</Property>
+      <Property name="cols">*,*,*,*</Property>
+      <Property name="createPrivateDataSet">true</Property>
+      <Property name="dataType">Condition</Property>
+      <Property name="labelAlign">center</Property>
+      <Property name="showHint">false</Property>
+      <AutoFormElement>
+        <ClientEvent name="onBlur">var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+console.log(data.getData());&#xD;
+if(null == data.getData().orgName || &quot;&quot; == data.getData().orgName){&#xD;
+	data.set(&quot;orgId&quot;,null);&#xD;
+}</ClientEvent>
+        <Property name="name">orgName</Property>
+        <Property name="property">orgName</Property>
+        <Property name="trigger">orgListDropDown,triggerClear</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">recordDate_startTime</Property>
+        <Property name="property">recordDate_startTime</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">recordDate_endTime</Property>
+        <Property name="property">recordDate_endTime</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">orgId</Property>
+        <Property name="property">orgId</Property>
+        <Property name="trigger">orgListDropDown,triggerClear</Property>
+        <Property name="visible">false</Property>
+        <Editor/>
+      </AutoFormElement>
+    </AutoForm>
+    <ToolBar>
+      <Property name="fixRight">true</Property>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+with (view.get(&quot;#dsOrgOnlineTime&quot;)){&#xD;
+set(&quot;parameter&quot;, data);&#xD;
+flushAsync();&#xD;
+}</ClientEvent>
+        <Property name="caption">查询</Property>
+        <Property name="iconClass">fa fa-search</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <Property name="caption">导出</Property>
+        <Property name="iconClass">fa fa-cloud-download</Property>
+        <Property name="action">exportAction</Property>
+      </ToolBarButton>
+      <Fill/>
+      <DataPilot>
+        <Property name="dataSet">dsOrgOnlineTime</Property>
+        <Property name="itemCodes">pages,pageSize</Property>
+      </DataPilot>
+    </ToolBar>
+    <DataGrid id="dgOrgOnlineTime">
+      <Property name="dataSet">dsOrgOnlineTime</Property>
+      <Property name="dataType">OrgOnlineTime</Property>
+      <Property name="selectionMode">multiRows</Property>
+      <Property name="readOnly">true</Property>
+      <RowNumColumn/>
+      <DataColumn name="orgId">
+        <Property name="property">orgId</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="orgName">
+        <Property name="property">orgName</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="time">
+        <Property name="property">time</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+    </DataGrid>
+    <Export2ReportAction id="exportAction">
+      <Property name="template">dgOrgOnlineTime</Property>
+      <Property name="dataScope">serverAll</Property>
+      <Property name="executingMessage">正在导出……</Property>
+      <Property name="successMessage">数据导出成功。</Property>
+      <Property name="extension">xlsx</Property>
+      <Property name="maxSize">10000</Property>
+      <Property name="fileName">单位在线时长</Property>
+    </Export2ReportAction>
+    <ListDropDown id="orgListDropDown">
+      <Property name="items">${dorado.getDataProvider(&quot;orgController#getAll&quot;).getResult()}</Property>
+      <Property name="property">code</Property>
+      <Property name="displayProperty">name</Property>
+      <Property name="filterOnOpen">false</Property>
+      <Property name="dynaFilter">true</Property>
+      <Property name="assignmentMap">orgName=name,orgId=code</Property>
+      <Property name="autoOpen">true</Property>
+    </ListDropDown>
+  </View>
+</ViewConfig>

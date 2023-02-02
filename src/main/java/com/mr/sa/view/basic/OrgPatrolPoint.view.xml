@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="Org">
+      <Property name="creationType">com.mr.sa.entity.Org</Property>
+      <PropertyDef name="id">
+        <Property></Property>
+        <Property name="label">ID</Property>
+      </PropertyDef>
+      <PropertyDef name="code">
+        <Property></Property>
+        <Property name="label">编码</Property>
+        <Property name="required">true</Property>
+      </PropertyDef>
+      <PropertyDef name="name">
+        <Property></Property>
+        <Property name="label">名称</Property>
+        <Property name="required">true</Property>
+      </PropertyDef>
+      <PropertyDef name="parentId">
+        <Property></Property>
+      </PropertyDef>
+      <PropertyDef name="longitude">
+        <Property></Property>
+        <Property name="label">经度</Property>
+      </PropertyDef>
+      <PropertyDef name="latitude">
+        <Property></Property>
+        <Property name="label">纬度</Property>
+      </PropertyDef>
+      <PropertyDef name="address">
+        <Property></Property>
+        <Property name="label">地址</Property>
+      </PropertyDef>
+      <Reference name="children">
+        <Property name="dataType">[SELF]</Property>
+        <Property name="parameter">$${this.id}</Property>
+        <Property name="dataProvider">orgController#loadChildren</Property>
+      </Reference>
+    </DataType>
+    <DataType name="PatrolPoint">
+      <Property name="creationType">com.mr.sa.entity.PatrolPoint</Property>
+      <PropertyDef name="id">
+        <Property></Property>
+        <Property name="label">id</Property>
+      </PropertyDef>
+      <PropertyDef name="createdDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">创建日期</Property>
+      </PropertyDef>
+      <PropertyDef name="creator">
+        <Property></Property>
+        <Property name="label">创建人</Property>
+      </PropertyDef>
+      <PropertyDef name="updateDate">
+        <Property name="dataType">Date</Property>
+        <Property name="label">修改日期</Property>
+      </PropertyDef>
+      <PropertyDef name="modifier">
+        <Property></Property>
+        <Property name="label">修改人</Property>
+      </PropertyDef>
+      <PropertyDef name="code">
+        <Property></Property>
+        <Property name="label">编码</Property>
+      </PropertyDef>
+      <PropertyDef name="name">
+        <Property></Property>
+        <Property name="label">名称</Property>
+      </PropertyDef>
+      <PropertyDef name="longitude">
+        <Property></Property>
+        <Property name="label">经度</Property>
+      </PropertyDef>
+      <PropertyDef name="latitude">
+        <Property></Property>
+        <Property name="label">纬度</Property>
+      </PropertyDef>
+      <PropertyDef name="orgId">
+        <Property></Property>
+        <Property name="label">组织ID</Property>
+      </PropertyDef>
+      <PropertyDef name="checked">
+        <Property name="dataType">boolean</Property>
+        <Property name="label">是否选中</Property>
+      </PropertyDef>
+      <PropertyDef name="required">
+        <Property name="dataType">boolean</Property>
+        <Property name="label">是否为必扫点</Property>
+      </PropertyDef>
+    </DataType>
+  </Model>
+  <View>
+    <Property name="packages">font-awesome,colors</Property>
+    <AjaxAction id="aaGetQrcode">
+      <Property name="service">patrolPointController#getQrcodeImage</Property>
+    </AjaxAction>
+    <DataSet id="dsOrg">
+      <Property name="dataProvider">orgController#load</Property>
+      <Property name="dataType">[Org]</Property>
+      <Property name="pageSize">30</Property>
+    </DataSet>
+    <DataSet id="dsPatrolPoint">
+      <Property name="dataType">[PatrolPoint]</Property>
+      <Property name="dataProvider">patrolPointController#query</Property>
+      <Property name="loadMode">manual</Property>
+    </DataSet>
+    <Panel layoutConstraint="left ">
+      <Property name="caption">组织</Property>
+      <Property name="width">25%</Property>
+      <Buttons/>
+      <Children>
+        <DataTree id="dtOrg" layoutConstraint="padding:15">
+          <ClientEvent name="onRenderNode">var data = arg.node.get(&quot;data&quot;);
+//var icon = data.get(&quot;icon&quot;) || &quot;&quot;;
+
+var icon='fa fa-building yellow-text';
+arg.node.set(&quot;iconClass&quot;, icon);
+$(arg.dom).text(data.get(&quot;name&quot;) || &quot;&quot;);
+</ClientEvent>
+          <ClientEvent name="onDataRowClick">var node=view.get(&quot;#dtOrg&quot;).getCurrentItem().get(&quot;data&quot;);&#xD;
+var orgId=node.get(&quot;code&quot;);&#xD;
+var parameter={&#xD;
+	&quot;orgId_eq&quot;:orgId&#xD;
+}&#xD;
+with (view.get(&quot;#dsPatrolPoint&quot;)){&#xD;
+set(&quot;parameter&quot;, parameter);&#xD;
+flushAsync();&#xD;
+}</ClientEvent>
+          <Property name="dataSet">dsOrg</Property>
+          <Property name="currentNodeDataPath">currentNode</Property>
+          <Property name="droppable">true</Property>
+          <Property name="droppableTags">node</Property>
+          <Property name="draggable">true</Property>
+          <Property name="dragTags">node</Property>
+          <Property name="dropMode">onOrInsertItems</Property>
+          <Property name="showLines">true</Property>
+          <BindingConfigs>
+            <BindingConfig>
+              <Property name="childrenProperty">children</Property>
+              <Property name="labelProperty">name</Property>
+              <Property name="recursive">true</Property>
+              <Property name="tipProperty">address</Property>
+              <Property name="name">code</Property>
+            </BindingConfig>
+          </BindingConfigs>
+        </DataTree>
+      </Children>
+      <Tools/>
+    </Panel>
+    <Panel>
+      <Property name="caption">巡防点</Property>
+      <Buttons/>
+      <Children>
+        <ToolBar>
+          <Property name="fixRight">true</Property>
+          <ToolBarButton>
+            <ClientEvent name="onClick">var datas = view.get(&quot;#dsPatrolPoint.data&quot;);&#xD;
+var node=view.get(&quot;#dtOrg&quot;).getCurrentItem().get(&quot;data&quot;);&#xD;
+var orgId=node.get(&quot;code&quot;);&#xD;
+var entity=datas.insert();&#xD;
+entity.set(&quot;orgId&quot;,orgId);&#xD;
+view.get(&quot;#dialogPatrolPoint&quot;).show();&#xD;
+arg.processDefault=false;</ClientEvent>
+            <Property name="caption">新增</Property>
+            <Property name="iconClass">fa fa-plus</Property>
+          </ToolBarButton>
+          <ToolBarButton>
+            <ClientEvent name="onClick">var data=view.get(&quot;#dsPatrolPoint.data&quot;);&#xD;
+if(data.current){&#xD;
+	view.get(&quot;#dialogPatrolPoint&quot;).show();&#xD;
+}else{&#xD;
+dorado.MessageBox.alert(&quot;请选择需要操作的记录!&quot;);&#xD;
+}</ClientEvent>
+            <Property name="caption">修改</Property>
+            <Property name="iconClass">fa fa-pencil-square-o</Property>
+          </ToolBarButton>
+          <ToolBarButton>
+            <ClientEvent name="onClick">dorado.MessageBox.confirm(&quot;确认操作吗?&quot;,function(){&#xD;
+	view.get(&quot;#dsPatrolPoint&quot;).getData(&quot;#&quot;).remove();&#xD;
+	view.get(&quot;#updateAction&quot;).execute();&#xD;
+	view.get(&quot;#dsPatrolPoint&quot;).flushAsync(); &#xD;
+})</ClientEvent>
+            <Property name="iconClass">fa fa-trash-o</Property>
+            <Property name="caption">删除(批量)</Property>
+          </ToolBarButton>
+          <ToolBarButton>
+            <ClientEvent name="onClick">var entity = view.get(&quot;#dsPatrolPoint&quot;).getData(&quot;#&quot;); &#xD;
+var patrolPointId=entity.get(&quot;id&quot;);&#xD;
+&#xD;
+ view.get(&quot;#aaGetQrcode&quot;).set(&quot;parameter&quot;, patrolPointId).execute(function(result) {&#xD;
+  	view.get(&quot;#imageQrcode&quot;).set(&quot;image&quot;, result);&#xD;
+	view.get(&quot;#dialogPatrolPointQrcode&quot;).show();&#xD;
+	&#xD;
+ })</ClientEvent>
+            <Property name="caption">查看二维码</Property>
+            <Property name="iconClass">fa fa-qrcode</Property>
+          </ToolBarButton>
+          <Fill/>
+          <ToolBarButton>
+            <ClientEvent name="onClick">view.get(&quot;#dgPatrolPoint&quot;).set(&quot;showFilterBar&quot;, self.get(&quot;toggled&quot;));
+</ClientEvent>
+            <Property name="caption">开启过滤</Property>
+            <Property name="iconClass">fa fa-filter</Property>
+            <Property name="toggleable">true</Property>
+          </ToolBarButton>
+        </ToolBar>
+        <DataGrid id="dgPatrolPoint">
+          <Property name="dataSet">dsPatrolPoint</Property>
+          <Property name="readOnly">true</Property>
+          <Property name="sortMode">clientSide</Property>
+          <Property name="filterMode">clientSide</Property>
+          <RowNumColumn/>
+          <DataColumn name="code">
+            <Property name="property">code</Property>
+            <Property name="align">center</Property>
+          </DataColumn>
+          <DataColumn name="name">
+            <Property name="property">name</Property>
+            <Property name="align">center</Property>
+          </DataColumn>
+          <DataColumn name="longitude">
+            <Property name="property">longitude</Property>
+            <Property name="align">center</Property>
+          </DataColumn>
+          <DataColumn name="latitude">
+            <Property name="property">latitude</Property>
+            <Property name="align">center</Property>
+          </DataColumn>
+          <DataColumn name="creator">
+            <Property name="property">creator</Property>
+            <Property name="align">center</Property>
+          </DataColumn>
+          <DataColumn name="createdDate">
+            <Property name="property">createdDate</Property>
+            <Property name="align">center</Property>
+          </DataColumn>
+        </DataGrid>
+      </Children>
+      <Tools/>
+    </Panel>
+    <UpdateAction id="updateAction">
+      <ClientEvent name="onSuccess" signature="self,arg,dialogPatrolPoint">dialogPatrolPoint.hide()
+</ClientEvent>
+      <Property name="dataResolver">patrolPointController#save</Property>
+      <Property name="successMessage">保存成功。</Property>
+      <Property name="executingMessage">正在保存……</Property>
+      <UpdateItem>
+        <Property name="dataSet">dsPatrolPoint</Property>
+      </UpdateItem>
+    </UpdateAction>
+    <Dialog id="dialogPatrolPoint">
+      <ClientEvent name="onHide" signature="self,arg,dsPatrolPoint">dsPatrolPoint.getData().cancel();
+</ClientEvent>
+      <Property name="caption">巡防点维护</Property>
+      <Property name="width">1024</Property>
+      <Property name="height">500</Property>
+      <Property name="maximizeable">true</Property>
+      <Property name="minimizeable">false</Property>
+      <Buttons>
+        <Button>
+          <ClientEvent name="onClick">self.get(&quot;parent&quot;).hide()
+</ClientEvent>
+          <Property name="caption">取消</Property>
+          <Property name="ui">decline</Property>
+          <Property name="iconClass">fa fa-times</Property>
+        </Button>
+        <Button>
+          <ClientEvent name="onClick">var dialog=view.get(&quot;#dialogPatrolPoint&quot;);&#xD;
+var action=view.get(&quot;#updateAction&quot;); &#xD;
+action.execute(function(){&#xD;
+&#xD;
+var node=view.get(&quot;#dtOrg&quot;).getCurrentItem().get(&quot;data&quot;);&#xD;
+var orgId=node.get(&quot;code&quot;);&#xD;
+var parameter={&#xD;
+	&quot;orgId_eq&quot;:orgId&#xD;
+}&#xD;
+with (view.get(&quot;#dsPatrolPoint&quot;)){&#xD;
+set(&quot;parameter&quot;, parameter);&#xD;
+flushAsync();&#xD;
+} &#xD;
+&#xD;
+});&#xD;
+ </ClientEvent>
+          <Property name="caption">保存</Property>
+          <Property name="ui">highlight</Property>
+          <Property name="iconClass">fa fa-floppy-o</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <AutoForm>
+          <Property name="dataSet">dsPatrolPoint</Property>
+          <Property name="cols">*,*</Property>
+          <Property name="labelPosition">left</Property>
+          <Property name="labelAlign">right</Property>
+          <AutoFormElement>
+            <Property name="name">code</Property>
+            <Property name="property">code</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">name</Property>
+            <Property name="property">name</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">longitude</Property>
+            <Property name="property">longitude</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">latitude</Property>
+            <Property name="property">latitude</Property>
+            <Editor/>
+          </AutoFormElement>
+        </AutoForm>
+      </Children>
+      <Tools/>
+    </Dialog>
+    <Dialog id="dialogPatrolPointQrcode">
+      <Property name="caption">巡防点二维码</Property>
+      <Property name="width">1024</Property>
+      <Property name="height">500</Property>
+      <Property name="maximizeable">true</Property>
+      <Property name="minimizeable">false</Property>
+      <Buttons/>
+      <Children>
+        <Image id="imageQrcode"/>
+      </Children>
+      <Tools/>
+    </Dialog>
+  </View>
+</ViewConfig>

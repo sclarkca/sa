@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="FocusArea">
+      <Property name="creationType">com.mr.sa.entity.basic.FocusArea</Property>
+      <PropertyDef name="id">
+        <Property name="dataType">String</Property>
+      </PropertyDef>
+      <PropertyDef name="areaName">
+        <Property name="dataType">String</Property>
+        <Property name="label">重点区域名称</Property>
+      </PropertyDef>
+      <PropertyDef name="coordinate">
+        <Property name="label">重点区域坐标框</Property>
+      </PropertyDef>
+      <PropertyDef name="centerLng">
+        <Property name="dataType">double</Property>
+        <Property name="label">中心点经度</Property>
+      </PropertyDef>
+      <PropertyDef name="centerLat">
+        <Property name="dataType">double</Property>
+        <Property name="label">中心点纬度</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="ConditionFocusArea">
+      <PropertyDef name="areaName">
+        <Property name="dataType">String</Property>
+        <Property name="label">重点区域名称</Property>
+      </PropertyDef>
+      <PropertyDef name="coordinate">
+        <Property name="dataType">String</Property>
+        <Property name="label">重点区域坐标框</Property>
+      </PropertyDef>
+      <PropertyDef name="centerLng">
+        <Property name="dataType">String</Property>
+        <Property name="label">中心点经度</Property>
+      </PropertyDef>
+      <PropertyDef name="centerLat">
+        <Property name="dataType">String</Property>
+        <Property name="label">中心点纬度</Property>
+      </PropertyDef>
+    </DataType>
+  </Model>
+  <View>
+    <Property name="packages">font-awesome</Property>
+    <Property name="title">重点区域信息维护</Property>
+    <DataSet id="dsFocusArea">
+      <ClientEvent name="beforeLoadData">var data = view.get(&quot;#formConditionFocusArea.entity&quot;);&#xD;
+self.set(&quot;parameter&quot;, data);</ClientEvent>
+      <Property name="dataProvider">focusAreaController#query</Property>
+      <Property name="pageSize">20</Property>
+      <Property name="dataType">[FocusArea]</Property>
+      <Property name="loadMode">lazy</Property>
+    </DataSet>
+    <UpdateAction id="uaFocusArea">
+      <Property name="successMessage">操作成功!</Property>
+      <Property name="executingMessage">正在保存...</Property>
+      <Property name="dataResolver">focusAreaController#save</Property>
+      <UpdateItem>
+        <Property name="dataSet">dsFocusArea</Property>
+      </UpdateItem>
+    </UpdateAction>
+    <AutoForm id="formConditionFocusArea">
+      <ClientEvent name="onKeyDown">if (arg.keyCode === 13) {&#xD;
+window.clearTimeout(self.urlQueryTimeout);&#xD;
+self.urlQueryTimeout = window.setTimeout(function() {&#xD;
+var data = view.get(&quot;#formConditionFocusArea.entity&quot;);&#xD;
+with (view.get(&quot;#dsFocusArea&quot;)) {&#xD;
+set(&quot;parameter&quot;, data);&#xD;
+flushAsync();&#xD;
+}&#xD;
+}, 250);&#xD;
+}</ClientEvent>
+      <Property name="labelWidth">120</Property>
+      <Property name="cols">*,*,*,*</Property>
+      <Property name="createPrivateDataSet">true</Property>
+      <Property name="dataType">ConditionFocusArea</Property>
+      <Property name="labelAlign">center</Property>
+      <Property name="showHint">false</Property>
+      <AutoFormElement>
+        <Property name="property">areaName</Property>
+        <Property name="name">重点区域名称</Property>
+        <Editor/>
+      </AutoFormElement>
+    </AutoForm>
+    <ToolBar>
+      <ToolBarButton>
+        <ClientEvent name="onClick">view.get(&quot;#dsFocusArea&quot;).flushAsync();</ClientEvent>
+        <Property name="caption">查询</Property>
+        <Property name="iconClass">fa fa-search</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var datas = view.get(&quot;#dsFocusArea.data&quot;);&#xD;
+datas.insert();&#xD;
+view.get(&quot;#dialogFocusArea&quot;).show();&#xD;
+arg.processDefault=false;</ClientEvent>
+        <Property name="caption">新增</Property>
+        <Property name="iconClass">fa fa-plus</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var entity = view.get(&quot;#dsFocusArea&quot;).getData(&quot;#&quot;);&#xD;
+if(entity){&#xD;
+view.get(&quot;#dialogFocusArea&quot;).show();&#xD;
+}else{&#xD;
+dorado.MessageBox.alert(&quot;当前表没有信息可供编辑&quot;);&#xD;
+}</ClientEvent>
+        <Property name="caption">修改</Property>
+        <Property name="iconClass">fa fa-pencil-square-o</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var uaFocusArea=view.get(&quot;#uaFocusArea&quot;);&#xD;
+var selection = view.get(&quot;#dgFocusArea&quot;).get(&quot;selection&quot;);&#xD;
+&#xD;
+if(0 != selection.length) {&#xD;
+dorado.MessageBox.confirm(&quot;确认操作吗?&quot;,function(){&#xD;
+&#xD;
+for (var i = 0; i &lt; selection.length; i++) {&#xD;
+var select = selection[i];&#xD;
+select.remove();&#xD;
+}&#xD;
+&#xD;
+uaFocusArea.execute();&#xD;
+view.get(&quot;#dsFocusArea&quot;).flushAsync(); &#xD;
+})&#xD;
+&#xD;
+} else {&#xD;
+dorado.MessageBox.alert(&quot;请选择需要操作的记录！&quot;);&#xD;
+}&#xD;
+&#xD;
+&#xD;
+</ClientEvent>
+        <Property name="iconClass">fa fa-trash-o</Property>
+        <Property name="caption">删除</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <Property name="caption">导出</Property>
+        <Property name="iconClass">fa fa-cloud-download</Property>
+        <Property name="action">eaFocusArea</Property>
+      </ToolBarButton>
+      <Fill/>
+      <DataPilot>
+        <Property name="dataSet">dsFocusArea</Property>
+        <Property name="itemCodes">pages,pageSize</Property>
+      </DataPilot>
+    </ToolBar>
+    <DataGrid id="dgFocusArea">
+      <Property name="dataSet">dsFocusArea</Property>
+      <Property name="dataType">FocusArea</Property>
+      <Property name="selectionMode">multiRows</Property>
+      <Property name="readOnly">true</Property>
+      <RowSelectorColumn/>
+      <RowNumColumn/>
+      <DataColumn name="重点区域名称">
+        <Property name="caption">重点区域名称</Property>
+        <Property name="property">areaName</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="中心点经度">
+        <Property name="caption">中心点经度</Property>
+        <Property name="property">centerLng</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="中心点纬度">
+        <Property name="caption">中心点纬度</Property>
+        <Property name="property">centerLat</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+    </DataGrid>
+    <Dialog id="dialogFocusArea">
+      <ClientEvent name="onClose">var data=view.get(&quot;#dsFocusArea&quot;).getData();&#xD;
+data.cancel();&#xD;
+</ClientEvent>
+      <Property name="center">true</Property>
+      <Property name="maximizeable">true</Property>
+      <Property name="width">1024</Property>
+      <Property name="height">500</Property>
+      <Property name="modal">true</Property>
+      <Property name="closeable">true</Property>
+      <Property name="caption">详情</Property>
+      <Buttons>
+        <Button>
+          <ClientEvent name="onClick">var data=view.get(&quot;#dsFocusArea&quot;).getData();
+var dialog=view.get(&quot;#dialogFocusArea&quot;);
+data.cancel();
+dialog.hide();</ClientEvent>
+          <Property name="caption">关闭</Property>
+          <Property name="iconClass">fa fa-arrow-circle-o-left</Property>
+          <Property name="ui">decline</Property>
+        </Button>
+        <Button>
+          <ClientEvent name="onClick">var dialog=view.get(&quot;#dialogFocusArea&quot;);&#xD;
+var action=view.get(&quot;#uaFocusArea&quot;);&#xD;
+action.execute(function(){&#xD;
+dialog.hide();&#xD;
+view.get(&quot;#dsFocusArea&quot;).flushAsync(); &#xD;
+})</ClientEvent>
+          <Property name="caption">确定</Property>
+          <Property name="iconClass">fa fa-check-circle</Property>
+          <Property name="ui">highlight</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <AutoForm>
+          <Property name="labelWidth">120</Property>
+          <Property name="dataSet">dsFocusArea</Property>
+          <Property name="cols">*,*</Property>
+          <Property name="labelAlign">center</Property>
+          <Property name="showHint">false</Property>
+          <Property name="showHintMessage">true</Property>
+          <AutoFormElement>
+            <Property name="name">重点区域名称</Property>
+            <Property name="property">areaName</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">重点区域坐标框</Property>
+            <Property name="property">coordinate</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">中心点经度</Property>
+            <Property name="property">centerLng</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">中心点纬度</Property>
+            <Property name="property">centerLat</Property>
+            <Editor/>
+          </AutoFormElement>
+        </AutoForm>
+      </Children>
+      <Tools/>
+    </Dialog>
+    <Export2ReportAction id="eaFocusArea">
+      <Property name="template">dgFocusArea</Property>
+      <Property name="dataScope">serverAll</Property>
+      <Property name="executingMessage">正在导出……</Property>
+      <Property name="successMessage">数据导出成功。</Property>
+      <Property name="extension">xlsx</Property>
+      <Property name="maxSize">10000</Property>
+      <Property name="fileName">重点区域</Property>
+    </Export2ReportAction>
+  </View>
+</ViewConfig>

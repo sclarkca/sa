@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ViewConfig>
+  <Arguments/>
+  <Context/>
+  <Model>
+    <DataType name="OpRecord">
+      <Property name="creationType">com.mr.sa.entity.OpRecord</Property>
+      <PropertyDef name="opType">
+        <Property></Property>
+        <Property name="label">操作类型</Property>
+      </PropertyDef>
+      <PropertyDef name="opId">
+        <Property></Property>
+        <Property name="label">操作key</Property>
+      </PropertyDef>
+      <PropertyDef name="details">
+        <Property></Property>
+        <Property name="label">详情</Property>
+      </PropertyDef>
+      <PropertyDef name="userId">
+        <Property></Property>
+        <Property name="label">用户ID</Property>
+      </PropertyDef>
+      <PropertyDef name="userName">
+        <Property></Property>
+        <Property name="label">用户昵称</Property>
+      </PropertyDef>
+      <PropertyDef name="createdData">
+        <Property name="dataType">DateTime</Property>
+        <Property name="label">创建时间</Property>
+      </PropertyDef>
+    </DataType>
+    <DataType name="Condition">
+      <PropertyDef name="opType">
+        <Property></Property>
+        <Property name="label">操作类型</Property>
+      </PropertyDef>
+      <PropertyDef name="opId">
+        <Property></Property>
+        <Property name="label">操作key</Property>
+      </PropertyDef>
+      <PropertyDef name="userId">
+        <Property></Property>
+        <Property name="label">用户ID</Property>
+      </PropertyDef>
+      <PropertyDef name="userName">
+        <Property></Property>
+        <Property name="label">用户昵称</Property>
+      </PropertyDef>
+    </DataType>
+  </Model>
+  <View>
+    <Property name="packages">font-awesome,colors,entypo</Property>
+    <Property name="title">积分规则信息维护</Property>
+    <DataSet id="dsOpRecord">
+      <Property name="dataProvider">opRecordController#query</Property>
+      <Property name="pageSize">20</Property>
+      <Property name="dataType">[OpRecord]</Property>
+      <Property name="loadMode">lazy</Property>
+      <Property name="readOnly">true</Property>
+    </DataSet>
+    <AutoForm id="formCondition">
+      <ClientEvent name="onKeyDown">if (arg.keyCode === 13) {&#xD;
+window.clearTimeout(self.urlQueryTimeout);&#xD;
+self.urlQueryTimeout = window.setTimeout(function() {&#xD;
+var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+with (view.get(&quot;#dsOpRecord&quot;)) {&#xD;
+set(&quot;parameter&quot;, data);&#xD;
+flushAsync();&#xD;
+}&#xD;
+}, 250);&#xD;
+}</ClientEvent>
+      <Property name="labelWidth">100</Property>
+      <Property name="cols">*,*,*,*</Property>
+      <Property name="createPrivateDataSet">true</Property>
+      <Property name="dataType">Condition</Property>
+      <Property name="labelAlign">center</Property>
+      <Property name="showHint">false</Property>
+      <AutoFormElement>
+        <Property name="name">opType</Property>
+        <Property name="property">opType</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">opId</Property>
+        <Property name="property">opId</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">userId</Property>
+        <Property name="property">userId</Property>
+        <Editor/>
+      </AutoFormElement>
+      <AutoFormElement>
+        <Property name="name">userName</Property>
+        <Property name="property">userName</Property>
+        <Editor/>
+      </AutoFormElement>
+    </AutoForm>
+    <ToolBar>
+      <Property name="fixRight">true</Property>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var data = view.get(&quot;#formCondition.entity&quot;);&#xD;
+with (view.get(&quot;#dsOpRecord&quot;)){&#xD;
+set(&quot;parameter&quot;, data);&#xD;
+flushAsync();&#xD;
+}</ClientEvent>
+        <Property name="caption">查询</Property>
+        <Property name="iconClass">fa fa-search</Property>
+      </ToolBarButton>
+      <ToolBarButton>
+        <ClientEvent name="onClick">var data=view.get(&quot;#dsOpRecord.data&quot;);&#xD;
+if(data.current){&#xD;
+view.get(&quot;#dialogOpRecord&quot;).show();&#xD;
+}else{&#xD;
+dorado.MessageBox.alert(&quot;当前表没有信息可供编辑!&quot;);&#xD;
+}</ClientEvent>
+        <Property name="caption">详情</Property>
+        <Property name="iconClass">fa fa-eye</Property>
+      </ToolBarButton>
+      <Fill/>
+      <DataPilot>
+        <Property name="dataSet">dsOpRecord</Property>
+        <Property name="itemCodes">pages,pageSize</Property>
+      </DataPilot>
+    </ToolBar>
+    <DataGrid id="dgOpRecord">
+      <ClientEvent name="onCreate">var OperationCellRendererDetail = $extend(dorado.widget.grid.SubControlCellRenderer, {&#xD;
+    createSubControl: function(arg) {&#xD;
+        var entity = arg.data;&#xD;
+        var container = new dorado.widget.Container({&#xD;
+            layout: new dorado.widget.layout.HBoxLayout()&#xD;
+        });&#xD;
+        container.set(&quot;children&quot;, [new dorado.widget.Button({&#xD;
+            iconClass: &quot;icon-network&quot;,&#xD;
+			tip:&quot;查看&quot;,&#xD;
+            onClick: function(self) {&#xD;
+				var data=view.get(&quot;#dsEvent.data&quot;); &#xD;
+				view.get(&quot;#dsOpRecordCoordinate&quot;).flushAsync();&#xD;
+				view.get(&quot;#dialogOpRecordCoordinate&quot;).show(); &#xD;
+            }&#xD;
+        })]);&#xD;
+        return container;&#xD;
+    },&#xD;
+&#xD;
+    refreshSubControl: function(container, arg) {&#xD;
+        var children = container.get(&quot;children&quot;);&#xD;
+    }&#xD;
+});&#xD;
+&#xD;
+self.set(&quot;#coordinate.renderer&quot;, new OperationCellRendererDetail());&#xD;
+&#xD;
+ </ClientEvent>
+      <Property name="dataSet">dsOpRecord</Property>
+      <Property name="selectionMode">multiRows</Property>
+      <Property name="readOnly">true</Property>
+      <RowNumColumn/>
+      <DataColumn name="opType">
+        <Property name="property">opType</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="opId">
+        <Property name="property">opId</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="details">
+        <Property name="property">details</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="userId">
+        <Property name="property">userId</Property>
+        <Property name="align">center</Property>
+      </DataColumn>
+      <DataColumn name="userName">
+        <Property name="property">userName</Property>
+        <Property name="align">center</Property>
+        <Property name="width">120</Property>
+      </DataColumn>
+      <DataColumn name="createdData">
+        <Property name="property">createdData</Property>
+        <Property name="align">center</Property>
+        <Property name="width">140</Property>
+      </DataColumn>
+    </DataGrid>
+    <Dialog id="dialogOpRecord">
+      <ClientEvent name="onClose">var data=view.get(&quot;#dsOpRecord&quot;).getData();&#xD;
+data.cancel();&#xD;
+</ClientEvent>
+      <Property name="center">true</Property>
+      <Property name="maximizeable">true</Property>
+      <Property name="width">1024</Property>
+      <Property name="height">500</Property>
+      <Property name="modal">true</Property>
+      <Property name="closeable">true</Property>
+      <Property name="caption">详情</Property>
+      <Buttons>
+        <Button>
+          <ClientEvent name="onClick">var data=view.get(&quot;#dsOpRecord&quot;).getData();
+var dialog=view.get(&quot;#dialogOpRecord&quot;);
+data.cancel();
+dialog.hide();</ClientEvent>
+          <Property name="caption">关闭</Property>
+          <Property name="iconClass">fa fa-arrow-circle-o-left</Property>
+          <Property name="ui">decline</Property>
+        </Button>
+      </Buttons>
+      <Children>
+        <AutoForm>
+          <Property name="labelWidth">100</Property>
+          <Property name="dataSet">dsOpRecord</Property>
+          <Property name="cols">*,*</Property>
+          <Property name="labelAlign">center</Property>
+          <Property name="showHint">false</Property>
+          <Property name="showHintMessage">true</Property>
+          <AutoFormElement>
+            <Property name="name">opType</Property>
+            <Property name="property">opType</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">opId</Property>
+            <Property name="property">opId</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">userId</Property>
+            <Property name="property">userId</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">userName</Property>
+            <Property name="property">userName</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement>
+            <Property name="name">createdData</Property>
+            <Property name="property">createdData</Property>
+            <Editor/>
+          </AutoFormElement>
+          <AutoFormElement layoutConstraint="colSpan:2">
+            <Property name="name">details</Property>
+            <Property name="property">details</Property>
+            <Property name="editorType">TextArea</Property>
+            <Editor/>
+          </AutoFormElement>
+        </AutoForm>
+      </Children>
+      <Tools/>
+    </Dialog>
+  </View>
+</ViewConfig>
